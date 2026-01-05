@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome | JDM Portfolio</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #ff6b35;
+      --dark: #0a0a0a;
+      --light: #f0ece3;
+    }
+    
+    html, body {
+      height: 100%;
+      font-family: 'Syne', sans-serif;
+    }
+    
+    .hero-body {
+      background: var(--dark);
+      background-image: 
+        radial-gradient(ellipse at 20% 80%, rgba(255, 107, 53, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(255, 107, 53, 0.1) 0%, transparent 40%),
+        linear-gradient(180deg, var(--dark) 0%, #151515 100%);
+    }
+    
+    .hero.is-fullheight {
+      min-height: 100vh;
+    }
+    
+    .welcome-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.875rem;
+      color: var(--accent);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease forwards;
+      animation-delay: 0.2s;
+    }
+    
+    .main-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 700;
+      color: var(--light);
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease forwards;
+      animation-delay: 0.4s;
+    }
+    
+    .main-title span {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--accent), #ff8c5a);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .subtitle-text {
+      font-size: 1.25rem;
+      color: #888;
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease forwards;
+      animation-delay: 0.6s;
+    }
+    
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: #666;
+      padding: 0.75rem 1.25rem;
+      border: 1px solid #333;
+      border-radius: 50px;
+      opacity: 0;
+      animation: fadeSlideUp 0.8s ease forwards;
+      animation-delay: 0.8s;
+    }
+    
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #4ade80;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    
+    @keyframes fadeSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+      }
+    }
+    
+    .corner-accent {
+      position: fixed;
+      width: 150px;
+      height: 150px;
+      border: 1px solid #222;
+      pointer-events: none;
+    }
+    
+    .corner-accent.top-left {
+      top: 2rem;
+      left: 2rem;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    .corner-accent.bottom-right {
+      bottom: 2rem;
+      right: 2rem;
+      border-left: none;
+      border-top: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="corner-accent top-left"></div>
+  <div class="corner-accent bottom-right"></div>
+  
+  <section class="hero is-fullheight">
+    <div class="hero-body">
+      <div class="container has-text-centered">
+        <p class="welcome-text">// Welcome</p>
+        <h1 class="main-title">
+          My <span>Portfolio</span>
+        </h1>
+        <p class="subtitle-text">
+          Testing custom domain configuration. Full site coming soon.
+        </p>
+        <div class="status-badge">
+          <span class="status-dot"></span>
+          <span>Domain test in progress</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>
+
