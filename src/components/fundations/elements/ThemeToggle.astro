@@ -1,0 +1,42 @@
+---
+// Theme toggle button component
+import Contrast from "@/components/fundations/icons/Contrast.astro";
+---
+
+<button
+  id="theme-toggle"
+  class="p-2 rounded-lg bg-base-100 hover:bg-base-200 dark:bg-base-800 dark:hover:bg-base-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-accent-500"
+  aria-label="Toggle theme"
+>
+  <Contrast size="base" class="text-base-900 dark:text-base-100" />
+</button>
+
+<script>
+  // Theme toggle functionality
+  function initThemeToggle() {
+    const toggleBtn = document.getElementById('theme-toggle');
+
+    if (toggleBtn && window.themeManager) {
+      // Set initial state
+      updateToggleIcon();
+
+      // Handle click
+      toggleBtn.addEventListener('click', () => {
+        const newTheme = window.themeManager.toggle();
+        updateToggleIcon();
+      });
+    }
+  }
+
+  function updateToggleIcon() {
+    // Could add rotation animation or icon changes here if desired
+    // For now, the Contrast icon works well for both themes
+  }
+
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initThemeToggle);
+  } else {
+    initThemeToggle();
+  }
+</script>

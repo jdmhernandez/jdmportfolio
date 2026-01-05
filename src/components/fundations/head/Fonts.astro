@@ -1,0 +1,9 @@
+<!-- Inter font:https://rsms.me/inter/ -->
+<!-- Preconnect early for faster DNS resolution -->
+<link rel="preconnect" href="https://rsms.me/" crossorigin />
+<!-- Preload the stylesheet for faster discovery -->
+<link rel="preload" href="https://rsms.me/inter/inter.css" as="style" />
+<!-- Defer loading by using media print trick - non-blocking -->
+<link rel="stylesheet" href="https://rsms.me/inter/inter.css" media="print" onload="this.media='all'" />
+<!-- Fallback for browsers without JavaScript -->
+<noscript><link rel="stylesheet" href="https://rsms.me/inter/inter.css" /></noscript>

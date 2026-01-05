@@ -1,0 +1,72 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Data
+const data = [
+  {
+    period: "Photography",
+    title: "Street Photography & Event Coverage",
+    description: `When I'm not coding, you'll find me with a camera in hand, trying to capturing candid moments around Edmonton. This duck featured in my portfolio is from Studio Ghibli's Spirited Away Film. It's taught me so much about composition, lighting, and connecting with people. Yes.. people, you can check out my portfolio. I just like this duck (Ōtori-Sama)`,
+  },
+  {
+    period: "TCG Card Collection",
+    title: "Pokémon & One Piece TCG",
+    description: `I collecting trading cards—Pokémon and One Piece are my main obsessions. There's something satisfying about hunting for rare cards and building a playing deck with a budget of $5. It scratches the same itch as debugging code: you're searching for that perfect piece to complete the puzzle.`,
+  },
+  {
+    period: "Hobbies",
+    title: "Comic Book Collector & Coffee Roaster",
+    description: `I'm a bit of a comic book nerd at heart (hence the Comic Chronicler project!), and I love experimenting with home coffee roasting. I just bought a Nespresso machine and have been exploring Amazon to buy imported coffee beans. I have made an unhealthy amount of connections in the world of caffeine. They know their stuff too. Cool beans`,
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard">
+    <div
+      class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b py-8 border-base-200 dark:border-base-700"
+    >
+      <div class="lg:sticky lg:top-24 lg:z-40 self-start">
+        <Text
+          tag="h2"
+          variant="textSM"
+          class="text-base-900 dark:text-base-100 font-bold uppercase"
+        >
+          Community & Interests
+        </Text>
+      </div>
+      <div class="flex flex-col gap-12 lg:col-span-2">
+        {
+          data.map((item, index) => (
+            <article class="group relative grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-start ">
+              <div class="lg:col-span-2">
+                <Text
+                  tag="h3"
+                  variant="textSM"
+                  class="text-base-900 dark:text-base-100 font-bold uppercase"
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textXS"
+                  class="mt-1 text-base-600 dark:text-base-400"
+                >
+                  {item.description}
+                </Text>
+              </div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-600 dark:text-base-400 lg:ml-auto"
+              >
+                <time datetime={item.period}> {item.period}</time>
+              </Text>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>

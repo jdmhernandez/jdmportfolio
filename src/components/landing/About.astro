@@ -1,0 +1,36 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+---
+
+<section>
+  <Wrapper variant="standard">
+    <div
+      class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b py-8 border-base-200 dark:border-base-700"
+    >
+      <div class="lg:sticky lg:top-24 lg:z-40 self-start">
+        <Text
+          tag="h2"
+          variant="textSM"
+          class="text-base-900 dark:text-base-100 font-bold uppercase"
+        >
+          About Me
+        </Text>
+      </div>
+      <div class="lg:col-span-2">
+        <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-400 mb-4">
+         I've been the go-to tech person for my family since I was a kid—you know, the one they call when their printer stops working or they can't figure out why their email isn't sending. Somewhere between fixing my uncle's laptop and teaching my grandma how to use FaceTime, I realized I actually loved this stuff. Not just the troubleshooting part, but the moment when things finally click and work the way they're supposed to.
+        </Text>
+
+        <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-400 mb-4">
+          Right now, I'm deep in my Digital Media program at NAIT, learning everything from frontend frameworks to backend databases. My favorite projects are the ones where I get to wear multiple hats—designing the user experience, writing clean code, and making sure everything works smoothly on any device.
+        </Text>
+
+        <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-400">
+          I've worked with everything from React and Node.js to WordPress and PHP, now I'm diving into Astro. What really gets me excited is understanding what users actually need and finding the simplest way to give it to them. Also the fastest way to give it to them. Whether it's debugging a tricky API or making sure a form looks perfect on mobile, I'm all in. I believe the best digital experiences are the ones you don't notice—they just work. That's my approach: build things that feel natural, that help people focus on what matters instead of fighting with technology. That's the kind of work I want to keep doing.
+        </Text>
+      </div>
+    </div>
+  </Wrapper>
+</section>

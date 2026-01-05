@@ -1,0 +1,72 @@
+---
+// Fundations
+import Text from "@/components/fundations/elements/Text.astro";
+import Wrapper from "@/components/fundations/containers/Wrapper.astro";
+// Data
+const data = [
+  {
+    period: "Web Design",
+    title: "Custom Website Development",
+    description: `I build websites that actually work for real people. Whether you need a simple portfolio or a full e-commerce site, I focus on making things that look great and function even better. Your website should help you, not give you headaches.`,
+  },
+  {
+    period: "Photography",
+    title: "Event & Portrait Photography",
+    description: `Even with my crazy schedule of my part-time job, coding and studying, I still find time to capture those special moments. Weddings, events, portraits—I'm there with my camera, trying to catch the genuine emotions and real connections. I've done this gig for over 2 years now and I am committed to impressing my clients.`,
+  },
+  {
+    period: "Consulting",
+    title: "Digital Strategy & Tech Advice",
+    description: `After building websites and learning from plenty of mistakes, I can help you figure out the best approach for your digital projects. Need to know if WordPress is right for you, or how to make your site load faster? Let's chat about it.`,
+  },
+];
+---
+
+<section>
+  <Wrapper variant="standard">
+    <div
+      class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b py-8 border-base-200 dark:border-base-700"
+    >
+      <div class="lg:sticky lg:top-24 lg:z-40 self-start">
+        <Text
+          tag="h2"
+          variant="textSM"
+          class="text-base-900 dark:text-base-100 font-bold uppercase"
+        >
+          What I Can Do For You
+        </Text>
+      </div>
+      <div class="flex flex-col gap-12 lg:col-span-2">
+        {
+          data.map((data) => (
+            <article class="group relative grid grid-cols-1 gap-4 lg:grid-cols-3 lg:items-start ">
+              <div class="lg:col-span-2">
+                <Text
+                  tag="h3"
+                  variant="textSM"
+                  class="text-base-900 dark:text-base-100 font-bold uppercase"
+                >
+                  {data.title}
+                </Text>
+                <Text
+                  tag="p"
+                  variant="textXS"
+                  class="mt-1 text-base-600 dark:text-base-400"
+                >
+                  {data.description}
+                </Text>
+              </div>
+              <Text
+                tag="p"
+                variant="textXS"
+                class="text-base-600 dark:text-base-400 lg:ml-auto"
+              >
+                <time datetime={data.period}> {data.period}</time>
+              </Text>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </Wrapper>
+</section>
