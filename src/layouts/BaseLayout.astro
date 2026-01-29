@@ -2,6 +2,7 @@
 import "@/styles/global.css";
 import BaseHead from "@/components/fundations/head/BaseHead.astro";
 import ThemeProvider from "@/components/fundations/scripts/ThemeProvider.astro";
+import ScrollReveal from "@/components/fundations/scripts/ScrollReveal.astro";
 // sections
 
 import Footer from "@/components/global/Footer.astro";
@@ -14,5 +15,6 @@ import Footer from "@/components/global/Footer.astro";
   <body class="bg-white dark:bg-base-900 flex flex-col h-svh transition-colors duration-200">
     <main class="grow"><slot /></main>
     <Footer />
+    <ScrollReveal />
   </body>
 </html>

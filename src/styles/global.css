@@ -45,3 +45,91 @@
     /* Discretionary ligatures */ "dlig" 1, /* Simplified u */ "cv06" 1,
     /* Capital G with spur */ "cv10" 1, /* Compact t */ "cv13" 1;
 }
+
+/* ========================================
+   SCROLL REVEAL ANIMATIONS
+   Mobile-safe, 60fps, reduced-motion aware
+   ======================================== */
+
+/* Initial hidden state for scroll reveal elements */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+/* Revealed state */
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered delays for child elements */
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .reveal.revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ========================================
+   MOBILE OPTIMIZATIONS
+   320px and up, touch-friendly
+   ======================================== */
+
+/* Ensure minimum touch target size (44px recommended, 16px absolute min) */
+@media (max-width: 640px) {
+  /* Better line height for mobile readability */
+  body {
+    line-height: 1.6;
+  }
+  
+  /* Ensure links and buttons have adequate touch targets */
+  a, button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Allow inline elements to have smaller targets */
+  p a, span a, li a {
+    min-height: auto;
+    min-width: auto;
+    padding: 4px 0;
+  }
+}
+
+/* Smooth scrolling with reduced motion fallback */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+  overflow-x: hidden;
+}
+
+/* Better text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}

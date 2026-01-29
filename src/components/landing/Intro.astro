@@ -10,37 +10,37 @@ import ThemeToggle from "@/components/fundations/elements/ThemeToggle.astro";
 ---
 
 <section>
-  <Wrapper variant="standard" class="pt-8 flex flex-col justify-between h-dvh">
-    <div class="flex flex-col lg:flex-row lg:justify-between items-start gap-8">
-      <Text tag="h1" variant="display4XL" class="text-black dark:text-white font-bold">
+  <Wrapper variant="standard" class="pt-6 sm:pt-8 flex flex-col justify-between min-h-dvh">
+    {/* Navigation - Mobile-friendly with adequate touch targets */}
+    <div class="flex flex-col lg:flex-row lg:justify-between items-start gap-6 lg:gap-8">
+      <Text tag="h1" variant="display4XL" class="text-black dark:text-white font-bold order-last lg:order-first">
         Justin Hernandez
       </Text>
-      <div class="flex gap-2 items-center w-fit order-first lg:order-none ml-auto">
+      <nav class="flex gap-1 sm:gap-2 items-center w-full lg:w-fit justify-between lg:justify-end">
         <ThemeToggle />
-        <Text
-          tag="a"
-          variant="textXS"
-          class="text-base-900 dark:text-base-100 hover:text-base-500 dark:hover:text-base-400 font-bold uppercase"
-          href="#projects"
-        >
-          Work</Text
-        >
-        <Text
-          tag="a"
-          variant="textXS"
-          class="text-base-900 dark:text-base-100 hover:text-base-500 dark:hover:text-base-400 font-bold uppercase"
-          href="#contact"
-        >
-           Contact</Text
-        >
-      </div>
+        <div class="flex gap-1 sm:gap-2">
+          <a
+            href="#projects"
+            class="px-3 py-2 sm:px-4 sm:py-2.5 text-xs font-bold uppercase text-base-900 dark:text-base-100 hover:text-accent-500 dark:hover:text-accent-400 transition-colors rounded-lg hover:bg-base-100 dark:hover:bg-base-800"
+          >
+            Work
+          </a>
+          <a
+            href="#contact"
+            class="px-3 py-2 sm:px-4 sm:py-2.5 text-xs font-bold uppercase text-base-900 dark:text-base-100 hover:text-accent-500 dark:hover:text-accent-400 transition-colors rounded-lg hover:bg-base-100 dark:hover:bg-base-800"
+          >
+            Contact
+          </a>
+        </div>
+      </nav>
     </div>
 
-    <div class="flex justify-center items-center py-16 relative">
+    {/* Hero Image Section */}
+    <div class="flex justify-center items-center py-12 sm:py-16 relative">
       <div class="relative inline-block">
         {/* Background text effect */}
         <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden rounded-2xl -inset-20">
-          <p class="text-9xl lg:text-[180px] font-black text-accent-600 dark:text-accent-400 opacity-100 -z-10 select-none tracking-tighter leading-none">
+          <p class="text-7xl sm:text-9xl lg:text-[180px] font-black text-accent-600 dark:text-accent-400 opacity-100 -z-10 select-none tracking-tighter leading-none">
             jdev
           </p>
         </div>
@@ -50,27 +50,27 @@ import ThemeToggle from "@/components/fundations/elements/ThemeToggle.astro";
           alt="Justin Hernandez - Web Designer and Developer"
           width={600}
           height={600}
-          class="w-64 lg:w-80 h-auto rounded-2xl shadow-2xl dark:shadow-2xl object-cover relative z-10"
+          class="w-56 sm:w-64 lg:w-80 h-auto rounded-2xl shadow-2xl dark:shadow-2xl object-cover relative z-10"
         />
       </div>
     </div>
 
+    {/* Bottom Section with Tagline */}
     <div
-      class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b pb-8 border-base-200 dark:border-base-700"
+      class="grid grid-cols-1 gap-4 md:grid-cols-3 border-b pb-6 sm:pb-8 border-base-200 dark:border-base-700"
     >
       <div>
         <Text
-          tag="h1"
+          tag="p"
           variant="textXS"
           class="text-base-900 dark:text-base-100 font-bold uppercase"
-          >Full-Stack Web Developer & Digital Creator</Text
         >
+          Junior Front-End Developer
+        </Text>
       </div>
       <div class="lg:col-span-2">
-        <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-400">
-         Hey there! I'm Justin Hernandez (you might know me online as Jdev). My goal is to be a full-stack web developer but I am  hooked on creating digital experiences that don't just look good—they actually <span class="text-accent-300 dark:text-accent-300">*feel*</span> good to use. Right now, I'm finishing up my diploma in Digital Media & Information Technology at NAIT. I can't imagine doing anything else with my life.
-
-       
+        <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-400 leading-relaxed">
+          Hey there! I'm Justin Hernandez (you might know me online as Jdev). I create digital experiences that don't just look good—they actually <span class="text-accent-500 dark:text-accent-400 font-medium">*feel*</span> good to use. Recent NAIT Digital Media & IT graduate, ready to build fast, accessible websites.
         </Text>
       </div>
     </div>
