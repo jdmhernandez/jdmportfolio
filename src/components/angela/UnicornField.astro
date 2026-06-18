@@ -1,0 +1,73 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { unicornMessages } = angelaConfig;
+const messagesJson = JSON.stringify(unicornMessages);
+const total = unicornMessages.length;
+---
+
+<div
+  id="unicorn-counter"
+  class="fixed bottom-4 right-4 z-40 angela-card px-4 py-2 text-xs font-semibold text-warm-muted shadow-lg"
+>
+  Unicorns found: <span id="unicorn-count">0</span>/{total}
+</div>
+
+<div
+  id="unicorn-toast"
+  class="fixed bottom-16 left-1/2 -translate-x-1/2 z-40 angela-card px-6 py-3 text-sm text-warm-ink shadow-lg opacity-0 pointer-events-none transition-opacity duration-300 max-w-xs text-center"
+>
+</div>
+
+<script define:vars={{ messagesJson, total }}>
+  const messages = JSON.parse(messagesJson);
+  const FOUND_KEY = "angela-unicorns-found";
+  const countEl = document.getElementById("unicorn-count");
+  const toast = document.getElementById("unicorn-toast");
+
+  function getFound() {
+    try {
+      return JSON.parse(sessionStorage.getItem(FOUND_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function updateCount() {
+    const found = getFound();
+    if (countEl) countEl.textContent = String(found.length);
+    document.querySelectorAll(".angela-unicorn-btn").forEach((btn) => {
+      const idx = Number(btn.dataset.unicornIndex);
+      if (found.includes(idx)) btn.classList.add("is-found");
+    });
+  }
+
+  function showToast(msg) {
+    if (!toast) return;
+    toast.textContent = msg;
+    toast.style.opacity = "1";
+    toast.style.pointerEvents = "auto";
+    setTimeout(() => {
+      toast.style.opacity = "0";
+      toast.style.pointerEvents = "none";
+    }, 3000);
+  }
+
+  document.querySelectorAll(".angela-unicorn-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const idx = Number(btn.dataset.unicornIndex);
+      const found = getFound();
+      if (found.includes(idx)) return;
+      found.push(idx);
+      sessionStorage.setItem(FOUND_KEY, JSON.stringify(found));
+      btn.classList.add("is-found");
+      updateCount();
+      showToast(messages[idx] || "I love you!");
+      if (found.length === total) {
+        setTimeout(() => showToast("You found them all! You're magical. ✨"), 3200);
+      }
+    });
+  });
+
+  updateCount();
+</script>

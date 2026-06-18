@@ -1,0 +1,271 @@
+---
+import { edmontonDates, vibeLabels, type DateVibe } from "@/data/angela/edmontonDates";
+
+const datesJson = JSON.stringify(edmontonDates);
+const vibesJson = JSON.stringify(vibeLabels);
+const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
+---
+
+<section id="dates" class="angela-section px-6 py-20 max-w-4xl mx-auto">
+  <div class="text-center mb-12">
+    <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-4">
+      Edmonton Date Ideas
+    </h2>
+    <p class="text-warm-muted">For our next adventure — right here at home.</p>
+  </div>
+
+  <div class="angela-card p-6 md:p-10 mb-8">
+    <h3 class="angela-display text-xl font-bold text-warm-ink mb-4 text-center">Spin the wheel</h3>
+    <div class="flex flex-col items-center gap-6">
+      <div class="relative w-64 h-64">
+        <canvas id="date-wheel" width="256" height="256" class="w-full h-full"></canvas>
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white border-2 border-lemon-400 shadow z-10"
+        >
+        </div>
+        <div
+          class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1 w-0 h-0 border-l-[10px] border-r-[10px] border-t-[16px] border-l-transparent border-r-transparent border-t-lemon-500 z-20"
+        >
+        </div>
+      </div>
+      <button
+        id="spin-btn"
+        class="py-3 px-8 rounded-xl bg-lavender-300 hover:bg-lavender-400 text-warm-ink font-semibold transition-colors"
+      >
+        Spin for a date!
+      </button>
+    </div>
+  </div>
+
+  <div class="angela-card p-6 md:p-10 mb-8">
+    <h3 class="angela-display text-xl font-bold text-warm-ink mb-4">Filter by vibe</h3>
+    <div id="vibe-filters" class="flex flex-wrap gap-2 mb-6"></div>
+    <div id="filtered-dates" class="grid gap-4 sm:grid-cols-2"></div>
+  </div>
+
+  <div class="angela-card p-6 md:p-10 mb-8">
+    <h3 class="angela-display text-xl font-bold text-warm-ink mb-4 text-center">Tonight's plan</h3>
+    <div id="plan-card" class="p-6 rounded-xl border-2 border-dashed border-lemon-300 bg-lemon-50/50 text-center min-h-[10rem] flex flex-col items-center justify-center">
+      <p class="text-warm-muted italic">Pick a date or spin the wheel to generate your plan card</p>
+    </div>
+    <div class="flex justify-center gap-3 mt-4">
+      <button
+        id="plan-random-btn"
+        class="text-sm py-2 px-4 rounded-lg bg-lemon-400 hover:bg-lemon-500 text-warm-ink font-medium"
+      >
+        Surprise me
+      </button>
+    </div>
+  </div>
+
+  <div class="angela-card p-6 md:p-10">
+    <h3 class="angela-display text-xl font-bold text-warm-ink mb-4">Saved favorites ♥</h3>
+    <div id="favorites-list" class="space-y-2 text-sm text-warm-muted italic">
+      <p>No favorites yet — heart a date idea to save it.</p>
+    </div>
+  </div>
+
+  <button
+    class="angela-unicorn-btn block mx-auto mt-6 w-7 opacity-50"
+    data-unicorn-index="5"
+    aria-label="Hidden unicorn"
+  >
+    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+  </button>
+</section>
+
+<script define:vars={{ datesJson, vibesJson, vibeKeys }}>
+  const dates = JSON.parse(datesJson);
+  const vibeLabels = JSON.parse(vibesJson);
+  const vibes = JSON.parse(vibeKeys);
+  const FAV_KEY = "angela-date-favorites";
+  let activeVibe = null;
+  let wheelRotation = 0;
+  let spinning = false;
+
+  function getFavorites() {
+    try {
+      return JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function saveFavorite(id) {
+    const favs = getFavorites();
+    if (!favs.includes(id)) {
+      favs.push(id);
+      localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+      renderFavorites();
+      renderFiltered();
+    }
+  }
+
+  function renderFavorites() {
+    const el = document.getElementById("favorites-list");
+    const favs = getFavorites();
+    if (!el) return;
+    if (!favs.length) {
+      el.innerHTML = "<p>No favorites yet — heart a date idea to save it.</p>";
+      return;
+    }
+    el.innerHTML = favs
+      .map((id) => {
+        const d = dates.find((x) => x.id === id);
+        return d ? `<p class="text-warm-ink">♥ ${d.title}</p>` : "";
+      })
+      .join("");
+  }
+
+  function renderPlanCard(date) {
+    const el = document.getElementById("plan-card");
+    if (!el || !date) return;
+    el.innerHTML = `
+      <p class="text-xs uppercase tracking-wider text-lavender-400 mb-2">Date Night Plan</p>
+      <h4 class="angela-display text-2xl font-bold text-warm-ink mb-3">${date.title}</h4>
+      <p class="text-warm-muted mb-3">${date.description}</p>
+      <p class="text-sm text-warm-ink mb-2"><strong>Why it's perfect:</strong> ${date.why}</p>
+      <p class="text-sm text-warm-muted italic">${date.addOn}</p>
+    `;
+  }
+
+  function renderFiltered() {
+    const el = document.getElementById("filtered-dates");
+    if (!el) return;
+    const filtered = activeVibe ? dates.filter((d) => d.vibes.includes(activeVibe)) : dates;
+    const favs = getFavorites();
+    el.innerHTML = filtered
+      .map(
+        (d) => `
+      <div class="p-4 rounded-xl bg-white/70 border border-lemon-200 hover:border-lemon-400 transition-colors">
+        <div class="flex justify-between items-start gap-2 mb-2">
+          <h4 class="font-bold text-warm-ink text-sm">${d.title}</h4>
+          <button class="fav-btn text-lg ${favs.includes(d.id) ? "text-red-400" : "text-warm-muted hover:text-red-400"}" data-id="${d.id}" aria-label="Save favorite">${favs.includes(d.id) ? "♥" : "♡"}</button>
+        </div>
+        <p class="text-xs text-warm-muted mb-3">${d.description}</p>
+        <div class="flex flex-wrap gap-1 mb-3">
+          ${d.vibes.map((v) => `<span class="text-[10px] px-2 py-0.5 rounded-full bg-lavender-100 text-lavender-400">${vibeLabels[v]}</span>`).join("")}
+        </div>
+        <button class="plan-btn text-xs text-lemon-600 font-semibold hover:underline" data-id="${d.id}">Plan this date →</button>
+      </div>
+    `
+      )
+      .join("");
+
+    el.querySelectorAll(".fav-btn").forEach((btn) => {
+      btn.addEventListener("click", () => saveFavorite(btn.dataset.id));
+    });
+    el.querySelectorAll(".plan-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const d = dates.find((x) => x.id === btn.dataset.id);
+        renderPlanCard(d);
+      });
+    });
+  }
+
+  const filterEl = document.getElementById("vibe-filters");
+  if (filterEl) {
+    filterEl.innerHTML = `<button class="vibe-chip px-3 py-1.5 rounded-full text-xs font-semibold bg-lemon-400 text-warm-ink" data-vibe="">All</button>${vibes
+      .map(
+        (v) =>
+          `<button class="vibe-chip px-3 py-1.5 rounded-full text-xs font-semibold bg-white/70 text-warm-muted hover:bg-lemon-100 border border-lemon-200" data-vibe="${v}">${vibeLabels[v]}</button>`
+      )
+      .join("")}`;
+
+    filterEl.querySelectorAll(".vibe-chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        filterEl.querySelectorAll(".vibe-chip").forEach((c) => {
+          c.classList.remove("bg-lemon-400", "text-warm-ink");
+          c.classList.add("bg-white/70", "text-warm-muted");
+        });
+        chip.classList.add("bg-lemon-400", "text-warm-ink");
+        chip.classList.remove("bg-white/70", "text-warm-muted");
+        activeVibe = chip.dataset.vibe || null;
+        renderFiltered();
+      });
+    });
+  }
+
+  const canvas = document.getElementById("date-wheel");
+  const ctx = canvas?.getContext("2d");
+  const colors = ["#F5D547", "#E8D5F2", "#A8C5A0", "#FDE68A", "#D4B8E8", "#C5D9C0", "#FEF0C7", "#B794D4", "#8AAB7F", "#FFF8E7"];
+
+  function drawWheel(rotation = 0) {
+    if (!ctx || !canvas) return;
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    const r = 118;
+    const slice = (2 * Math.PI) / dates.length;
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.translate(cx, cy);
+    ctx.rotate(rotation);
+
+    dates.forEach((d, i) => {
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.arc(0, 0, r, i * slice, (i + 1) * slice);
+      ctx.closePath();
+      ctx.fillStyle = colors[i % colors.length];
+      ctx.fill();
+      ctx.strokeStyle = "#fff";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      ctx.save();
+      ctx.rotate(i * slice + slice / 2);
+      ctx.textAlign = "right";
+      ctx.fillStyle = "#3d3428";
+      ctx.font = "bold 9px DM Sans, sans-serif";
+      const label = d.title.length > 18 ? d.title.slice(0, 16) + "…" : d.title;
+      ctx.fillText(label, r - 8, 4);
+      ctx.restore();
+    });
+
+    ctx.restore();
+    ctx.beginPath();
+    ctx.arc(cx, cy, 20, 0, 2 * Math.PI);
+    ctx.fillStyle = "#fff";
+    ctx.fill();
+    ctx.strokeStyle = "#F5D547";
+    ctx.lineWidth = 3;
+    ctx.stroke();
+  }
+
+  drawWheel();
+
+  document.getElementById("spin-btn")?.addEventListener("click", () => {
+    if (spinning) return;
+    spinning = true;
+    const extra = 4 + Math.random() * 4;
+    const target = wheelRotation + extra * 2 * Math.PI;
+    const duration = 3000;
+    const start = performance.now();
+    const startRot = wheelRotation;
+
+    function animate(now) {
+      const t = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - t, 3);
+      wheelRotation = startRot + (target - startRot) * ease;
+      drawWheel(wheelRotation);
+      if (t < 1) {
+        requestAnimationFrame(animate);
+      } else {
+        spinning = false;
+        const normalized = ((wheelRotation % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+        const slice = (2 * Math.PI) / dates.length;
+        const idx = Math.floor((2 * Math.PI - normalized + slice / 2) / slice) % dates.length;
+        renderPlanCard(dates[idx]);
+      }
+    }
+    requestAnimationFrame(animate);
+  });
+
+  document.getElementById("plan-random-btn")?.addEventListener("click", () => {
+    renderPlanCard(dates[Math.floor(Math.random() * dates.length)]);
+  });
+
+  renderFiltered();
+  renderFavorites();
+</script>

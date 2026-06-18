@@ -1,0 +1,33 @@
+---
+import AngelaLayout from "@/layouts/AngelaLayout.astro";
+import UnlockGate from "@/components/angela/UnlockGate.astro";
+import FloatingDecor from "@/components/angela/FloatingDecor.astro";
+import Hero from "@/components/angela/Hero.astro";
+import LoveLetter from "@/components/angela/LoveLetter.astro";
+import LemonPieStory from "@/components/angela/LemonPieStory.astro";
+import Timeline from "@/components/angela/Timeline.astro";
+import TravelPassport from "@/components/angela/TravelPassport.astro";
+import BirthdaySection from "@/components/angela/BirthdaySection.astro";
+import EdmontonDates from "@/components/angela/EdmontonDates.astro";
+import PhotoGallery from "@/components/angela/PhotoGallery.astro";
+import Closing from "@/components/angela/Closing.astro";
+import UnicornField from "@/components/angela/UnicornField.astro";
+import { angelaConfig } from "@/data/angela/config";
+---
+
+<AngelaLayout title={`For ${angelaConfig.name}`}>
+  <UnlockGate />
+  <div id="angela-content" class="angela-hidden-content relative z-10">
+    <FloatingDecor />
+    <Hero />
+    <LoveLetter />
+    <LemonPieStory />
+    <Timeline />
+    <TravelPassport />
+    <BirthdaySection />
+    <EdmontonDates />
+    <PhotoGallery />
+    <Closing />
+    <UnicornField />
+  </div>
+</AngelaLayout>

@@ -1,0 +1,147 @@
+export const angelaConfig = {
+  name: "Angela",
+  password: "lemon pie",
+  passwordHint: "Think Sagada...",
+  relationshipStart: "2022-06-01",
+  birthdayDate: "1997-06-15",
+
+  hero: {
+    headline: "For Angela",
+    subline: "Four years. Infinite adventures. One love.",
+  },
+
+  loveLetter: [
+    "Angela, four years with you has been the most beautiful journey of my life. Every day I wake up grateful that the universe put us on the same path.",
+    "You have this way of turning ordinary moments into memories I'll carry forever — a laugh on a long drive, the way you light up when you talk about a place you want to see, the quiet mornings that feel like home.",
+    "I want to know more. More of your stories, more of your dreams, more of every version of you — the traveler, the dreamer, the woman who finds meaning in a lemon pie slice she never got to taste.",
+    "I love you more than words on a screen can hold. This little corner of the internet is just for you.",
+  ],
+
+  lemonPieStory: {
+    sagada:
+      "High in the mountains of Sagada, there's a legend that lives in every bakery window — the famous lemon pie slice. Golden crust, bright filling, a taste of sunshine at the edge of the clouds. Everyone who visits talks about it. It's part of the place itself.",
+    disappointment:
+      "You were there. You walked those misty streets, felt that mountain air, stood in the very town where this pie is legendary — and you didn't get to try it. I know how much that disappointed you. You were so close to something everyone raves about, and it slipped away.",
+    meaning:
+      "But you found something deeper in that moment — a meaning that wasn't about the pie at all. Sometimes the things we miss become the stories we carry. The almost-tried, the almost-had. Sagada gave you more than a dessert; it gave you a symbol of longing, of beauty just out of reach, and the grace to find poetry in that.",
+    tattoo:
+      "Now you're etching that story onto your skin — a lemon pie slice tattoo, permanent and proud. I think it's beautiful. Not because of what you missed, but because of what you chose to honor. I'm behind you every step of the way, my love. Wear your story.",
+  },
+
+  timeline: [
+    {
+      date: "Day One",
+      title: "Where it all began",
+      memory:
+        "The moment I knew there was something extraordinary about you. Edit this with your real story.",
+    },
+    {
+      date: "First Adventure",
+      title: "Our first trip together",
+      memory:
+        "The open road, new places, and the feeling that anywhere is home when I'm with you.",
+    },
+    {
+      date: "Sagada",
+      title: "Mountains & meaning",
+      memory:
+        "Misty peaks, lemon pie legends, and a story that became part of who you are.",
+    },
+    {
+      date: "Every Day",
+      title: "The ordinary magic",
+      memory:
+        "Coffee mornings, inside jokes, quiet evenings — the real love lives here.",
+    },
+  ],
+
+  travelStamps: {
+    visited: [
+      {
+        place: "Sagada",
+        country: "Philippines",
+        memory: "Mountain mist, rice terraces, and a lemon pie story for the ages.",
+      },
+      {
+        place: "Edmonton",
+        country: "Canada",
+        memory: "Our home base — river valleys, winter lights, and us.",
+      },
+      {
+        place: "Add a place",
+        country: "Your pick",
+        memory: "Replace this with a trip you've shared together.",
+      },
+    ],
+    dream: [
+      {
+        place: "Japan",
+        country: "Cherry blossoms & ramen",
+        memory: "Temples, neon streets, and matching travel photos.",
+      },
+      {
+        place: "Italy",
+        country: "Amalfi dreams",
+        memory: "Coastal drives, pasta, and golden hour everywhere.",
+      },
+      {
+        place: "Iceland",
+        country: "Northern lights",
+        memory: "Waterfalls, hot springs, and skies that dance.",
+      },
+    ],
+  },
+
+  birthday: {
+    title: "29 & Unstoppable",
+    message:
+      "Don't let anything stop you — especially not a number. Twenty-nine is not a ceiling; it's a launchpad. The best adventures, the boldest dreams, and the deepest love are all still ahead of you.",
+    submessage:
+      "You are a traveler, a dreamer, and the most radiant person I know. Age is just a stamp in the passport — and yours is filling up beautifully.",
+  },
+
+  unicornMessages: [
+    "You make every trip better.",
+    "I'd follow you anywhere.",
+    "Your smile is my favourite view.",
+    "Four years and I'd do it all again.",
+    "You're my favourite adventure.",
+    "Still falling for you, every day.",
+    "Forever your travel buddy.",
+  ],
+
+  photos: [
+    { src: null, caption: "Add our photo here" },
+    { src: null, caption: "A travel memory" },
+    { src: null, caption: "Us being us" },
+    { src: null, caption: "Somewhere beautiful" },
+    { src: null, caption: "Adventure awaits" },
+    { src: null, caption: "My favourite person" },
+    { src: null, caption: "Together" },
+    { src: null, caption: "One more for the road" },
+  ],
+
+  closing: {
+    title: "Still Choosing You",
+    message:
+      "More adventures await, Angela. More cities, more sunsets, more lemon pie slices we actually get to share. I love you — today, tomorrow, and on every trip we haven't taken yet.",
+    cta: "Spin another date idea",
+  },
+};
+
+export function daysTogether(startDate: string): number {
+  const start = new Date(startDate);
+  const now = new Date();
+  const diff = now.getTime() - start.getTime();
+  return Math.floor(diff / (1000 * 60 * 60 * 24));
+}
+
+export function daysUntilBirthday(birthday: string): number {
+  const [, month, day] = birthday.split("-").map(Number);
+  const now = new Date();
+  let next = new Date(now.getFullYear(), month - 1, day);
+  if (next < now) {
+    next = new Date(now.getFullYear() + 1, month - 1, day);
+  }
+  return Math.ceil((next.getTime() - now.getTime()) / (1000 * 60 * 60 * 24));
+}

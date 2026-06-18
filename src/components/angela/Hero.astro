@@ -1,0 +1,65 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { hero, name } = angelaConfig;
+---
+
+<section class="angela-section relative min-h-[85vh] flex items-center justify-center px-6 py-20 overflow-hidden">
+  <div class="absolute inset-0 opacity-30">
+    <div
+      class="absolute top-10 left-0 w-[200%] h-24 angela-drift"
+      style="animation: angela-drift 40s linear infinite"
+    >
+      <div class="flex gap-32">
+        {
+          Array.from({ length: 12 }).map(() => (
+            <span class="text-lavender-200 text-6xl select-none">✦</span>
+          ))
+        }
+      </div>
+    </div>
+    <div
+      class="absolute bottom-20 right-0 w-[200%] h-16"
+      style="animation: angela-drift 50s linear infinite reverse"
+    >
+      <div class="flex gap-24">
+        {
+          Array.from({ length: 10 }).map(() => (
+            <span class="text-lemon-300 text-4xl select-none opacity-60">☁</span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="relative z-10 text-center max-w-3xl angela-reveal">
+    <p class="text-sm uppercase tracking-[0.3em] text-lavender-400 mb-4 font-medium">
+      A love letter in pixels
+    </p>
+    <h1 class="angela-display text-5xl md:text-7xl lg:text-8xl font-bold text-warm-ink mb-6">
+      {hero.headline}
+    </h1>
+    <p class="angela-display text-xl md:text-2xl text-warm-muted italic mb-8">
+      {hero.subline}
+    </p>
+    <div class="flex justify-center items-center gap-3">
+      <img src="/angela/lemon-slice.svg" alt="" class="w-10 opacity-80" />
+      <span class="text-warm-muted text-sm">made with love for {name}</span>
+      <img src="/angela/unicorn.svg" alt="" class="w-8 opacity-80" />
+    </div>
+    <a
+      href="#letter"
+      class="inline-block mt-12 text-sm text-warm-muted hover:text-warm-ink transition-colors animate-bounce"
+    >
+      Scroll to begin ↓
+    </a>
+  </div>
+
+  <button
+    class="angela-unicorn-btn absolute top-[18%] right-[10%] w-8 opacity-60"
+    data-unicorn-index="0"
+    aria-label="Find the unicorns"
+  >
+    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+  </button>
+</section>

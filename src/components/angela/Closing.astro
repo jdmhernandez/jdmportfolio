@@ -1,0 +1,32 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { closing, name } = angelaConfig;
+---
+
+<section id="closing" class="angela-section px-6 py-24 max-w-3xl mx-auto text-center">
+  <img src="/angela/unicorn.svg" alt="" class="w-14 mx-auto mb-6 opacity-70 angela-float" />
+  <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-6">
+    {closing.title}
+  </h2>
+  <p class="text-warm-muted leading-relaxed text-base md:text-lg mb-8 max-w-xl mx-auto">
+    {closing.message}
+  </p>
+  <p class="angela-display text-2xl text-lavender-400 italic mb-8">
+    I love you, {name}.
+  </p>
+  <a
+    href="#dates"
+    class="inline-block py-3 px-8 rounded-xl bg-lemon-400 hover:bg-lemon-500 text-warm-ink font-semibold transition-colors"
+  >
+    {closing.cta} →
+  </a>
+
+  <button
+    class="angela-unicorn-btn block mx-auto mt-10 w-7 opacity-50"
+    data-unicorn-index="6"
+    aria-label="Hidden unicorn"
+  >
+    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+  </button>
+</section>

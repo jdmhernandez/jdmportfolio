@@ -1,0 +1,44 @@
+---
+import { angelaConfig, daysTogether } from "@/data/angela/config";
+
+const { timeline, relationshipStart } = angelaConfig;
+const totalDays = daysTogether(relationshipStart);
+---
+
+<section id="timeline" class="angela-section px-6 py-20 max-w-3xl mx-auto">
+  <div class="text-center mb-12">
+    <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-4">
+      Four Years Together
+    </h2>
+    <p class="text-2xl text-lemon-500 font-semibold mb-2">
+      {totalDays.toLocaleString()} days
+    </p>
+    <p class="text-warm-muted text-sm">and counting every single one</p>
+  </div>
+
+  <div class="relative pl-8 md:pl-0">
+    <div class="absolute left-3 md:left-1/2 top-0 bottom-0 w-0.5 angela-timeline-line md:-translate-x-1/2"></div>
+
+    {
+      timeline.map((item, i) => (
+        <article
+          class={`relative mb-10 md:w-[calc(50%-2rem)] ${i % 2 === 0 ? "md:mr-auto md:pr-8 md:text-right" : "md:ml-auto md:pl-8 md:ml-[calc(50%+2rem)]"}`}
+        >
+          <div
+            class={`absolute w-4 h-4 rounded-full bg-lemon-400 border-2 border-white shadow left-0 md:left-1/2 md:-translate-x-1/2 top-2`}
+          />
+          <div class="angela-card p-6 ml-6 md:ml-0">
+            <time class="text-xs uppercase tracking-wider text-lavender-400 font-semibold">
+              {item.date}
+            </time>
+            <h3 class="angela-display text-xl font-bold text-warm-ink mt-1 mb-2">{item.title}</h3>
+            <p class="text-warm-muted text-sm leading-relaxed">{item.memory}</p>
+            {item.photo && (
+              <img src={item.photo} alt="" class="mt-4 rounded-lg w-full object-cover max-h-48" />
+            )}
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

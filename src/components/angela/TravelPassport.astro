@@ -1,0 +1,113 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { travelStamps } = angelaConfig;
+const visitedJson = JSON.stringify(travelStamps.visited);
+const dreamJson = JSON.stringify(travelStamps.dream);
+---
+
+<section id="passport" class="angela-section px-6 py-20 max-w-4xl mx-auto">
+  <div class="text-center mb-12">
+    <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-4">
+      Our Travel Passport
+    </h2>
+    <p class="text-warm-muted">Stamps from where we've been — and where we're headed next.</p>
+  </div>
+
+  <div class="angela-card p-6 md:p-10 max-w-lg mx-auto" style="background: linear-gradient(135deg, #FFF8E7 0%, #fff 50%, #F3E8FF 100%)">
+    <div class="border-b-2 border-dashed border-lemon-300 pb-4 mb-6 flex justify-between items-center">
+      <span class="text-xs uppercase tracking-widest text-warm-muted">Passport</span>
+      <img src="/angela/unicorn.svg" alt="" class="w-6 opacity-60" />
+    </div>
+
+    <div class="flex gap-2 mb-6" role="tablist">
+      <button
+        id="tab-visited"
+        class="passport-tab flex-1 py-2 px-4 rounded-lg text-sm font-semibold bg-lemon-400 text-warm-ink"
+        data-tab="visited"
+      >
+        Places we've been
+      </button>
+      <button
+        id="tab-dream"
+        class="passport-tab flex-1 py-2 px-4 rounded-lg text-sm font-semibold bg-white/60 text-warm-muted hover:bg-lemon-100"
+        data-tab="dream"
+      >
+        Dream destinations
+      </button>
+    </div>
+
+    <div id="stamp-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6"></div>
+
+    <div
+      id="stamp-detail"
+      class="hidden p-4 rounded-xl bg-white/80 border border-lemon-200 text-center min-h-[5rem] flex items-center justify-center"
+    >
+      <p class="text-warm-muted text-sm italic">Click a stamp to reveal a memory</p>
+    </div>
+  </div>
+
+  <button
+    class="angela-unicorn-btn block mx-auto mt-8 w-7 opacity-50"
+    data-unicorn-index="3"
+    aria-label="Hidden unicorn"
+  >
+    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+  </button>
+</section>
+
+<script define:vars={{ visitedJson, dreamJson }}>
+  const visited = JSON.parse(visitedJson);
+  const dream = JSON.parse(dreamJson);
+  const grid = document.getElementById("stamp-grid");
+  const detail = document.getElementById("stamp-detail");
+  const tabs = document.querySelectorAll(".passport-tab");
+
+  let current = visited;
+
+  function renderStamps(stamps) {
+    if (!grid) return;
+    grid.innerHTML = stamps
+      .map(
+        (s, i) => `
+      <button class="angela-stamp p-3 rounded-xl bg-white/70 border border-lemon-200 text-center" data-index="${i}">
+        <div class="w-12 h-12 mx-auto rounded-full border-2 border-dashed border-lavender-300 flex items-center justify-center text-lg mb-2">✈</div>
+        <p class="text-xs font-bold text-warm-ink">${s.place}</p>
+        <p class="text-[10px] text-warm-muted">${s.country}</p>
+      </button>
+    `
+      )
+      .join("");
+
+    grid.querySelectorAll("button").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const idx = Number(btn.dataset.index);
+        const stamp = stamps[idx];
+        if (detail) {
+          detail.classList.remove("hidden");
+          detail.innerHTML = `<div><p class="font-bold text-warm-ink mb-1">${stamp.place}</p><p class="text-sm text-warm-muted">${stamp.memory}</p></div>`;
+        }
+      });
+    });
+  }
+
+  tabs.forEach((tab) => {
+    tab.addEventListener("click", () => {
+      tabs.forEach((t) => {
+        t.classList.remove("bg-lemon-400", "text-warm-ink");
+        t.classList.add("bg-white/60", "text-warm-muted");
+      });
+      tab.classList.add("bg-lemon-400", "text-warm-ink");
+      tab.classList.remove("bg-white/60", "text-warm-muted");
+      current = tab.dataset.tab === "dream" ? dream : visited;
+      renderStamps(current);
+      if (detail) {
+        detail.classList.add("hidden");
+        detail.innerHTML =
+          '<p class="text-warm-muted text-sm italic">Click a stamp to reveal a memory</p>';
+      }
+    });
+  });
+
+  renderStamps(visited);
+</script>

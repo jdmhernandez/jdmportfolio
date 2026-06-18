@@ -1,0 +1,56 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { lemonPieStory } = angelaConfig;
+
+const acts = [
+  { key: "sagada", label: "Act I — Sagada", emoji: "🏔️" },
+  { key: "disappointment", label: "Act II — The Almost", emoji: "🍋" },
+  { key: "meaning", label: "Act III — The Meaning", emoji: "✨" },
+  { key: "tattoo", label: "Act IV — Forever Inked", emoji: "🦄" },
+] as const;
+---
+
+<section id="lemon-pie" class="angela-section px-6 py-20 max-w-4xl mx-auto">
+  <div class="text-center mb-16">
+    <img src="/angela/lemon-slice.svg" alt="" class="w-20 mx-auto mb-6 angela-float" />
+    <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-4">
+      The Lemon Pie Story
+    </h2>
+    <p class="text-warm-muted max-w-xl mx-auto">
+      Sagada's famous slice — the one you didn't get to try, and the meaning you found anyway.
+    </p>
+  </div>
+
+  <div class="relative">
+    <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 angela-timeline-line -translate-x-1/2 opacity-40"></div>
+
+    {
+      acts.map((act, i) => (
+        <article
+          class={`angela-card p-6 md:p-8 mb-8 relative angela-reveal ${i % 2 === 0 ? "md:mr-[52%]" : "md:ml-[52%]"}`}
+          style={`animation-delay: ${i * 0.15}s`}
+        >
+          <div class="flex items-center gap-3 mb-4">
+            <span class="text-2xl">{act.emoji}</span>
+            <h3 class="angela-display text-xl font-bold text-warm-ink">{act.label}</h3>
+          </div>
+          <p class="text-warm-muted leading-relaxed">{lemonPieStory[act.key]}</p>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="text-center mt-8">
+    <p class="text-sm text-lavender-400 italic">📍 Sagada, Mountain Province, Philippines</p>
+  </div>
+
+  <button
+    class="angela-unicorn-btn absolute left-[5%] w-7 opacity-50"
+    data-unicorn-index="2"
+    style="position: relative; margin-top: 1rem"
+    aria-label="Hidden unicorn"
+  >
+    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+  </button>
+</section>

@@ -8,5 +8,5 @@ export default defineConfig({
   },
   
   site: 'https://jdmhernandez.ca/',
-  integrations: [sitemap()]
+  integrations: [sitemap({ filter: (page) => !page.includes('/angela') })]
 });

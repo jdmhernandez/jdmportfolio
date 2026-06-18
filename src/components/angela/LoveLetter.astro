@@ -1,0 +1,59 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { loveLetter } = angelaConfig;
+const fullText = loveLetter.join("\n\n");
+---
+
+<section id="letter" class="angela-section px-6 py-20 max-w-3xl mx-auto">
+  <div class="angela-card p-8 md:p-12">
+    <h2 class="angela-display text-3xl md:text-4xl font-bold text-warm-ink mb-8 text-center">
+      My love letter to you
+    </h2>
+    <div
+      id="typewriter"
+      class="text-warm-muted leading-relaxed text-base md:text-lg min-h-[12rem] whitespace-pre-wrap"
+    >
+    </div>
+    <div class="mt-8 flex justify-center">
+      <span class="inline-block w-0.5 h-5 bg-lemon-400 animate-pulse" id="typewriter-cursor"></span>
+    </div>
+  </div>
+
+  <button
+    class="angela-unicorn-btn absolute right-[6%] mt-4 w-7 opacity-50"
+    data-unicorn-index="1"
+    style="position: relative; float: right"
+    aria-label="Hidden unicorn"
+  >
+    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+  </button>
+</section>
+
+<script define:vars={{ fullText }}>
+  const el = document.getElementById("typewriter");
+  const cursor = document.getElementById("typewriter-cursor");
+  if (el) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          let i = 0;
+          const speed = 18;
+          function type() {
+            if (i < fullText.length) {
+              el.textContent = fullText.slice(0, i + 1);
+              i++;
+              setTimeout(type, speed);
+            } else {
+              cursor?.classList.add("hidden");
+            }
+          }
+          type();
+        }
+      },
+      { threshold: 0.3 }
+    );
+    observer.observe(el);
+  }
+</script>

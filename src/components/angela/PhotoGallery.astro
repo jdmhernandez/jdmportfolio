@@ -1,0 +1,41 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { photos } = angelaConfig;
+---
+
+<section id="gallery" class="angela-section px-6 py-20 max-w-5xl mx-auto">
+  <div class="text-center mb-12">
+    <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-4">
+      Our Moments
+    </h2>
+    <p class="text-warm-muted">A gallery for our adventures — add your photos anytime.</p>
+  </div>
+
+  <div class="columns-2 md:columns-3 gap-4 space-y-4">
+    {
+      photos.map((photo) => (
+        <figure class="break-inside-avoid">
+          {photo.src ? (
+            <img
+              src={photo.src}
+              alt={photo.caption}
+              class="w-full rounded-xl object-cover shadow-md"
+              loading="lazy"
+            />
+          ) : (
+            <div class="angela-photo-placeholder rounded-xl aspect-[4/5] flex flex-col items-center justify-center p-4 text-center">
+              <img src="/angela/lemon-slice.svg" alt="" class="w-10 mb-3 opacity-40" />
+              <p class="text-sm text-warm-muted italic">{photo.caption}</p>
+            </div>
+          )}
+          {photo.src && (
+            <figcaption class="text-xs text-warm-muted mt-2 text-center italic">
+              {photo.caption}
+            </figcaption>
+          )}
+        </figure>
+      ))
+    }
+  </div>
+</section>

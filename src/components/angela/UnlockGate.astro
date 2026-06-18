@@ -1,0 +1,115 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+
+const { password, passwordHint } = angelaConfig;
+---
+
+<div id="angela-gate" class="angela-gate">
+  <div class="angela-card max-w-md w-full mx-4 p-8 md:p-10 text-center relative z-10">
+    <div class="flex justify-center gap-4 mb-6">
+      <img src="/angela/lemon-slice.svg" alt="" class="w-16 angela-float" />
+      <img src="/angela/unicorn.svg" alt="" class="w-14 angela-float" style="animation-delay: 1s" />
+    </div>
+    <h1 class="angela-display text-3xl md:text-4xl font-bold text-warm-ink mb-2">
+      A little secret
+    </h1>
+    <p class="text-warm-muted text-sm mb-6">This page is just for you, Angela.</p>
+    <form id="angela-unlock-form" class="space-y-4">
+      <label for="angela-password" class="sr-only">Secret word</label>
+      <input
+        id="angela-password"
+        type="password"
+        placeholder="Enter our secret word..."
+        autocomplete="off"
+        class="w-full px-4 py-3 rounded-xl border border-lemon-300 bg-white/80 text-warm-ink placeholder:text-warm-muted/60 focus:outline-none focus:ring-2 focus:ring-lavender-300 text-center"
+      />
+      <p id="angela-hint" class="text-xs text-warm-muted italic">{passwordHint}</p>
+      <p id="angela-error" class="text-sm text-red-500 hidden">Not quite — try again, my love.</p>
+      <button
+        type="submit"
+        class="w-full py-3 px-6 rounded-xl bg-lemon-400 hover:bg-lemon-500 text-warm-ink font-semibold transition-colors"
+      >
+        Unlock
+      </button>
+    </form>
+  </div>
+</div>
+
+<canvas id="angela-confetti" class="fixed inset-0 pointer-events-none z-[110]"></canvas>
+
+<script define:vars={{ password }}>
+  const STORAGE_KEY = "angela-unlocked";
+  const gate = document.getElementById("angela-gate");
+  const form = document.getElementById("angela-unlock-form");
+  const input = document.getElementById("angela-password");
+  const error = document.getElementById("angela-error");
+  const content = document.getElementById("angela-content");
+
+  function unlock() {
+    sessionStorage.setItem(STORAGE_KEY, "true");
+    gate?.classList.add("is-hidden");
+    content?.classList.add("is-unlocked");
+    fireConfetti();
+  }
+
+  if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+    gate?.classList.add("is-hidden");
+    content?.classList.add("is-unlocked");
+  }
+
+  form?.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const value = input?.value.trim().toLowerCase();
+    if (value === password.toLowerCase()) {
+      error?.classList.add("hidden");
+      unlock();
+    } else {
+      error?.classList.remove("hidden");
+      form?.classList.add("angela-shake");
+      setTimeout(() => form?.classList.remove("angela-shake"), 450);
+    }
+  });
+
+  function fireConfetti() {
+    const canvas = document.getElementById("angela-confetti");
+    if (!canvas) return;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const colors = ["#F5D547", "#E8D5F2", "#A8C5A0", "#FDE68A", "#B794D4"];
+    const pieces = Array.from({ length: 120 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * 100,
+      w: 6 + Math.random() * 6,
+      h: 4 + Math.random() * 4,
+      color: colors[Math.floor(Math.random() * colors.length)],
+      rotation: Math.random() * 360,
+      speed: 2 + Math.random() * 4,
+      drift: (Math.random() - 0.5) * 2,
+      spin: (Math.random() - 0.5) * 8,
+    }));
+
+    let frame = 0;
+    function animate() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach((p) => {
+        p.y += p.speed;
+        p.x += p.drift;
+        p.rotation += p.spin;
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate((p.rotation * Math.PI) / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      });
+      frame++;
+      if (frame < 90) requestAnimationFrame(animate);
+      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+    animate();
+  }
+</script>
