@@ -2,7 +2,7 @@
 import { angelaConfig, daysUntilBirthday } from "@/data/angela/config";
 import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
 
-const { birthday: birthdayConfig, birthdayDate } = angelaConfig;
+const { birthday: birthdayConfig, birthdayDate, birthdayDisplay } = angelaConfig;
 const daysLeft = daysUntilBirthday(birthdayDate);
 ---
 
@@ -27,10 +27,11 @@ const daysLeft = daysUntilBirthday(birthdayDate);
     </p>
     <p class="text-warm-muted italic text-sm mb-8">{birthdayConfig.submessage}</p>
 
-    <div class="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/70 border border-lemon-300">
-      <span class="text-3xl font-bold text-lemon-500">{daysLeft}</span>
-      <span class="text-sm text-warm-muted text-left">
-        days until your<br />next adventure around the sun
+    <div class="inline-flex flex-col sm:flex-row items-center gap-3 px-6 py-4 rounded-2xl bg-white/70 border border-lemon-300">
+      <span class="text-4xl font-bold text-lemon-500 leading-none">{daysLeft}</span>
+      <span class="text-sm text-warm-muted text-center sm:text-left">
+        days until <strong class="text-warm-ink">{birthdayDisplay}</strong><br />
+        your next adventure around the sun
       </span>
     </div>
   </div>

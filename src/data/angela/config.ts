@@ -3,7 +3,12 @@ export const angelaConfig = {
   password: "lemon pie",
   passwordHint: "Think Sagada...",
   relationshipStart: "2022-06-01",
-  birthdayDate: "1997-06-15",
+  birthdayDate: "1997-06-30",
+  birthdayDisplay: "June 30",
+
+  // Optional: add Supabase URL + anon key in Netlify env vars for shared sticky notes
+  // PUBLIC_SUPABASE_URL and PUBLIC_SUPABASE_ANON_KEY
+  loveNotesRoomKey: "angela-justin",
 
   hero: {
     headline: "For Angela",

@@ -50,7 +50,7 @@ const { password, passwordHint } = angelaConfig;
   }
 
   function unlock() {
-    sessionStorage.setItem(STORAGE_KEY, "true");
+    localStorage.setItem(STORAGE_KEY, "true");
     gate?.classList.add("is-hidden");
     getContent()?.classList.add("is-unlocked");
     fireConfetti();
@@ -61,11 +61,17 @@ const { password, passwordHint } = angelaConfig;
     getContent()?.classList.add("is-unlocked");
   }
 
+  // Migrate old session unlock + remember her on this device
+  if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+    localStorage.setItem(STORAGE_KEY, "true");
+    sessionStorage.removeItem(STORAGE_KEY);
+  }
+
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
-      if (sessionStorage.getItem(STORAGE_KEY) === "true") applyUnlockedState();
+      if (localStorage.getItem(STORAGE_KEY) === "true") applyUnlockedState();
     });
-  } else if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+  } else if (localStorage.getItem(STORAGE_KEY) === "true") {
     applyUnlockedState();
   }
 

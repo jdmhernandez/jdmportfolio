@@ -1,0 +1,277 @@
+---
+import { angelaConfig } from "@/data/angela/config";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
+
+const { name, loveNotesRoomKey } = angelaConfig;
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL ?? "";
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY ?? "";
+const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
+---
+
+<section id="love-notes" class="angela-section px-6 py-20 max-w-4xl mx-auto">
+  <div class="text-center mb-10">
+    <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-4">
+      Our Sticky Notes
+    </h2>
+    <p class="text-warm-muted max-w-xl mx-auto">
+      Leave a note for each other — thoughts, date ideas, inside jokes, or a little love anytime
+      you come back.
+    </p>
+    <p id="notes-mode-label" class="text-xs text-lavender-400 mt-3 italic"></p>
+  </div>
+
+  <div id="welcome-back" class="hidden angela-card p-4 mb-6 text-center border border-lavender-200">
+    <p class="text-warm-ink text-sm">
+      Welcome back, {name} <UnicornEmoji size="sm" class="inline-block align-middle" /> — your notes
+      are still here.
+    </p>
+    <p class="text-xs text-warm-muted mt-1">
+      Bookmark this page on your phone (Share → Add to Home Screen) to come back anytime.
+    </p>
+  </div>
+
+  <div class="angela-card p-4 md:p-6 mb-8">
+    <label for="note-author" class="text-xs font-semibold text-warm-muted uppercase tracking-wide"
+      >Writing as</label
+    >
+    <div class="flex gap-2 mt-2 mb-4">
+      <button
+        type="button"
+        class="note-author-btn flex-1 py-2 rounded-lg text-sm font-semibold bg-lemon-400 text-warm-ink"
+        data-author="angela">Angela</button
+      >
+      <button
+        type="button"
+        class="note-author-btn flex-1 py-2 rounded-lg text-sm font-semibold bg-white/70 text-warm-muted border border-lemon-200"
+        data-author="justin">Justin</button
+      >
+    </div>
+    <textarea
+      id="note-input"
+      rows="3"
+      maxlength="280"
+      placeholder="Write something sweet..."
+      class="w-full px-4 py-3 rounded-xl border border-lemon-300 bg-white/80 text-warm-ink placeholder:text-warm-muted/60 focus:outline-none focus:ring-2 focus:ring-lavender-300 resize-none text-base"
+    ></textarea>
+    <div class="flex flex-wrap items-center justify-between gap-3 mt-3">
+      <div class="flex gap-2" id="note-colors" aria-label="Note color"></div>
+      <button
+        id="post-note-btn"
+        type="button"
+        class="py-2 px-6 rounded-xl bg-lavender-300 hover:bg-lavender-400 text-warm-ink font-semibold text-sm"
+      >
+        Pin note
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="notes-board"
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[8rem]"
+  >
+    <p class="text-warm-muted italic text-sm col-span-full text-center" id="notes-empty">
+      No notes yet — pin the first one.
+    </p>
+  </div>
+</section>
+
+<script
+  define:vars={{
+    supabaseUrl,
+    supabaseKey,
+    hasSharedBoard,
+    roomKey: loveNotesRoomKey,
+    angelaName: name,
+  }}
+>
+  const LOCAL_KEY = "angela-love-notes";
+  const VISIT_KEY = "angela-returned";
+  const colors = [
+    { id: "lemon", bg: "#FFF8E7", border: "#F5D547" },
+    { id: "lavender", bg: "#F3E8FF", border: "#D4B8E8" },
+    { id: "sage", bg: "#EEF5EC", border: "#A8C5A0" },
+  ];
+  let selectedColor = "lemon";
+  let selectedAuthor = "angela";
+
+  const board = document.getElementById("notes-board");
+  const empty = document.getElementById("notes-empty");
+  const input = document.getElementById("note-input");
+  const modeLabel = document.getElementById("notes-mode-label");
+  const welcomeBack = document.getElementById("welcome-back");
+
+  if (localStorage.getItem(VISIT_KEY) === "true") {
+    welcomeBack?.classList.remove("hidden");
+  }
+  localStorage.setItem(VISIT_KEY, "true");
+
+  if (modeLabel) {
+    modeLabel.textContent = hasSharedBoard
+      ? "Shared board — you both see the same notes on any device."
+      : "Saving on this device for now — shared board can be enabled later.";
+  }
+
+  const colorEl = document.getElementById("note-colors");
+  if (colorEl) {
+    colorEl.innerHTML = colors
+      .map(
+        (c, i) =>
+          `<button type="button" class="note-color-btn w-8 h-8 rounded-full border-2 ${i === 0 ? "ring-2 ring-offset-2 ring-lavender-300" : ""}" data-color="${c.id}" style="background:${c.bg};border-color:${c.border}" aria-label="Color ${c.id}"></button>`
+      )
+      .join("");
+    colorEl.querySelectorAll(".note-color-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        selectedColor = btn.dataset.color;
+        colorEl.querySelectorAll(".note-color-btn").forEach((b) => {
+          b.classList.toggle("ring-2", b === btn);
+          b.classList.toggle("ring-offset-2", b === btn);
+          b.classList.toggle("ring-lavender-300", b === btn);
+        });
+      });
+    });
+  }
+
+  document.querySelectorAll(".note-author-btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      selectedAuthor = btn.dataset.author;
+      document.querySelectorAll(".note-author-btn").forEach((b) => {
+        const on = b.dataset.author === selectedAuthor;
+        b.classList.toggle("bg-lemon-400", on);
+        b.classList.toggle("text-warm-ink", on);
+        b.classList.toggle("bg-white/70", !on);
+        b.classList.toggle("text-warm-muted", !on);
+        b.classList.toggle("border", !on);
+        b.classList.toggle("border-lemon-200", !on);
+      });
+    });
+  });
+
+  function getLocalNotes() {
+    try {
+      return JSON.parse(localStorage.getItem(LOCAL_KEY) || "[]");
+    } catch {
+      return [];
+    }
+  }
+
+  function saveLocalNotes(notes) {
+    localStorage.setItem(LOCAL_KEY, JSON.stringify(notes));
+  }
+
+  async function fetchSharedNotes() {
+    if (!hasSharedBoard) return getLocalNotes();
+    const res = await fetch(
+      `${supabaseUrl}/rest/v1/love_notes?room_key=eq.${roomKey}&select=*&order=created_at.desc`,
+      {
+        headers: {
+          apikey: supabaseKey,
+          Authorization: `Bearer ${supabaseKey}`,
+        },
+      }
+    );
+    if (!res.ok) throw new Error("fetch failed");
+    return res.json();
+  }
+
+  async function postSharedNote(note) {
+    if (!hasSharedBoard) {
+      const notes = getLocalNotes();
+      notes.unshift({ ...note, id: crypto.randomUUID(), created_at: new Date().toISOString() });
+      saveLocalNotes(notes);
+      return;
+    }
+    await fetch(`${supabaseUrl}/rest/v1/love_notes`, {
+      method: "POST",
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+        "Content-Type": "application/json",
+        Prefer: "return=minimal",
+      },
+      body: JSON.stringify({
+        room_key: roomKey,
+        author: note.author,
+        body: note.body,
+        color: note.color,
+      }),
+    });
+  }
+
+  async function deleteNote(id, isShared) {
+    if (!isShared) {
+      saveLocalNotes(getLocalNotes().filter((n) => n.id !== id));
+      return;
+    }
+    await fetch(`${supabaseUrl}/rest/v1/love_notes?id=eq.${id}`, {
+      method: "DELETE",
+      headers: {
+        apikey: supabaseKey,
+        Authorization: `Bearer ${supabaseKey}`,
+      },
+    });
+  }
+
+  function noteStyle(colorId) {
+    const c = colors.find((x) => x.id === colorId) || colors[0];
+    return `background:${c.bg};border-color:${c.border}`;
+  }
+
+  function renderNotes(notes) {
+    if (!board) return;
+    if (!notes.length) {
+      board.innerHTML =
+        '<p class="text-warm-muted italic text-sm col-span-full text-center">No notes yet — pin the first one.</p>';
+      return;
+    }
+    board.innerHTML = notes
+      .map((n) => {
+        const who = n.author === "justin" ? "Justin" : angelaName;
+        const date = new Date(n.created_at).toLocaleDateString(undefined, {
+          month: "short",
+          day: "numeric",
+        });
+        return `<article class="p-4 rounded-xl border-2 shadow-sm flex flex-col gap-2" style="${noteStyle(n.color)}">
+          <div class="flex justify-between items-start gap-2">
+            <span class="text-xs font-bold text-warm-ink uppercase tracking-wide">${who}</span>
+            <button type="button" class="delete-note-btn text-warm-muted hover:text-red-400 text-xs shrink-0" data-id="${n.id}" data-shared="${hasSharedBoard}">×</button>
+          </div>
+          <p class="text-sm text-warm-ink leading-relaxed whitespace-pre-wrap">${escapeHtml(n.body)}</p>
+          <time class="text-[10px] text-warm-muted mt-auto">${date}</time>
+        </article>`;
+      })
+      .join("");
+
+    board.querySelectorAll(".delete-note-btn").forEach((btn) => {
+      btn.addEventListener("click", async () => {
+        await deleteNote(btn.dataset.id, btn.dataset.shared === "true");
+        await loadNotes();
+      });
+    });
+  }
+
+  function escapeHtml(text) {
+    const d = document.createElement("div");
+    d.textContent = text;
+    return d.innerHTML;
+  }
+
+  async function loadNotes() {
+    try {
+      const notes = await fetchSharedNotes();
+      renderNotes(notes);
+    } catch {
+      renderNotes(getLocalNotes());
+    }
+  }
+
+  document.getElementById("post-note-btn")?.addEventListener("click", async () => {
+    const body = input?.value.trim();
+    if (!body) return;
+    await postSharedNote({ author: selectedAuthor, body, color: selectedColor });
+    if (input) input.value = "";
+    await loadNotes();
+  });
+
+  loadNotes();
+  if (hasSharedBoard) setInterval(loadNotes, 15000);
+</script>
