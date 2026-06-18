@@ -158,9 +158,9 @@ export const angelaConfig = {
   ],
 
   closing: {
-    title: "Still Choosing You",
+    title: "Thank you for being you",
     message:
-      "More adventures await, Angela. More cities, more sunsets, more lemon pie slices we actually get to share. I love you today, tomorrow, and on every trip we haven't taken yet.",
+      "More adventures are still waiting for us, Angela. More places to see, more sunsets to catch, more lemon pie we can finally enjoy without sharing. I love you now, and I'll love you in all the moments we haven't lived yet.",
     cta: "Spin another date idea",
   },
 };
