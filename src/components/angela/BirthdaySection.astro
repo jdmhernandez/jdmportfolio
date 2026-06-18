@@ -1,5 +1,6 @@
 ---
 import { angelaConfig, daysUntilBirthday } from "@/data/angela/config";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
 
 const { birthday: birthdayConfig, birthdayDate } = angelaConfig;
 const daysLeft = daysUntilBirthday(birthdayDate);
@@ -14,7 +15,7 @@ const daysLeft = daysUntilBirthday(birthdayDate);
       <img src="/angela/lemon-slice.svg" alt="" class="w-12" />
     </div>
     <div class="absolute bottom-4 right-4 opacity-20">
-      <img src="/angela/unicorn.svg" alt="" class="w-10" />
+      <UnicornEmoji class="opacity-20" />
     </div>
 
     <p class="text-sm uppercase tracking-[0.25em] text-lavender-400 mb-4">Happy Birthday</p>
@@ -35,10 +36,10 @@ const daysLeft = daysUntilBirthday(birthdayDate);
   </div>
 
   <button
-    class="angela-unicorn-btn block mx-auto mt-6 w-7 opacity-50"
+    class="angela-unicorn-btn block mx-auto mt-6 opacity-50"
     data-unicorn-index="4"
     aria-label="Hidden unicorn"
   >
-    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+    <UnicornEmoji size="sm" />
   </button>
 </section>

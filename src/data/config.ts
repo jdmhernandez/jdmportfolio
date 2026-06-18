@@ -43,9 +43,9 @@ export const angelaConfig = {
     },
     {
       date: "Sagada",
-      title: "Your mountains & meaning",
+      title: "Mountains & meaning",
       memory:
-        "A journey you took that stayed with you — misty peaks, lemon pie legends, and a story that became part of who you are. I'm proud of what you found there.",
+        "Misty peaks, lemon pie legends, and a story that became part of who you are.",
     },
     {
       date: "Every Day",
@@ -58,61 +58,36 @@ export const angelaConfig = {
   travelStamps: {
     visited: [
       {
-        place: "Calgary",
-        country: "Alberta, Canada",
-        memory: "City lights, chinooks, and time together out west.",
-      },
-      {
-        place: "Vancouver",
-        country: "British Columbia",
-        memory: "Mountains, ocean air, and exploring the coast.",
-      },
-      {
-        place: "Hamilton",
-        country: "Ontario",
-        memory: "Steel city charm and memories along the way.",
-      },
-      {
-        place: "Toronto",
-        country: "Ontario",
-        memory: "Big city energy, food, and nights out together.",
-      },
-      {
-        place: "Bataan & Batangas",
+        place: "Sagada",
         country: "Philippines",
-        memory: "Sun, family roots, and the islands you hold close.",
-      },
-      {
-        place: "Japan",
-        country: "Mountain / nature side",
-        memory: "Temples, trails, and the quiet beauty of the countryside.",
-      },
-      {
-        place: "Korea",
-        country: "South Korea",
-        memory: "Street food, cityscapes, and adventures abroad.",
+        memory: "Mountain mist, rice terraces, and a lemon pie story for the ages.",
       },
       {
         place: "Edmonton",
-        country: "Home",
+        country: "Canada",
         memory: "Our home base — river valleys, winter lights, and us.",
+      },
+      {
+        place: "Add a place",
+        country: "Your pick",
+        memory: "Replace this with a trip you've shared together.",
       },
     ],
     dream: [
       {
-        place: "Greece",
-        country: "Islands & history",
-        memory: "White cliffs, blue water, and slow evenings by the sea.",
+        place: "Japan",
+        country: "Cherry blossoms & ramen",
+        memory: "Temples, neon streets, and matching travel photos.",
+      },
+      {
+        place: "Italy",
+        country: "Amalfi dreams",
+        memory: "Coastal drives, pasta, and golden hour everywhere.",
       },
       {
         place: "Iceland",
         country: "Northern lights",
         memory: "Waterfalls, hot springs, and skies that dance.",
-      },
-      {
-        place: "Sagada",
-        country: "Philippines",
-        memory: "One day — that lemon pie slice, finally.",
       },
     ],
   },

@@ -1,5 +1,6 @@
 ---
 import { angelaConfig } from "@/data/angela/config";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
 
 const { hero, name } = angelaConfig;
 ---
@@ -45,7 +46,7 @@ const { hero, name } = angelaConfig;
     <div class="flex justify-center items-center gap-3">
       <img src="/angela/lemon-slice.svg" alt="" class="w-10 opacity-80" />
       <span class="text-warm-muted text-sm">made with love for {name}</span>
-      <img src="/angela/unicorn.svg" alt="" class="w-8 opacity-80" />
+      <UnicornEmoji size="sm" class="opacity-80" />
     </div>
     <a
       href="#letter"
@@ -56,10 +57,10 @@ const { hero, name } = angelaConfig;
   </div>
 
   <button
-    class="angela-unicorn-btn absolute top-[18%] right-[10%] w-8 opacity-60"
+    class="angela-unicorn-btn absolute top-[18%] right-[10%] opacity-60"
     data-unicorn-index="0"
     aria-label="Find the unicorns"
   >
-    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+    <UnicornEmoji />
   </button>
 </section>

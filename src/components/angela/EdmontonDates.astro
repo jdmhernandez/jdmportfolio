@@ -1,5 +1,6 @@
 ---
 import { edmontonDates, vibeLabels, type DateVibe } from "@/data/angela/edmontonDates";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
 
 const datesJson = JSON.stringify(edmontonDates);
 const vibesJson = JSON.stringify(vibeLabels);
@@ -61,16 +62,16 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
   <div class="angela-card p-6 md:p-10">
     <h3 class="angela-display text-xl font-bold text-warm-ink mb-4">Saved favorites ♥</h3>
     <div id="favorites-list" class="space-y-2 text-sm text-warm-muted italic">
-      <p>No favorites yet — heart a date idea to save it.</p>
+      <p>No favorites yet — heart a date idea to save it. Tap ♥ again or Remove to unsave.</p>
     </div>
   </div>
 
   <button
-    class="angela-unicorn-btn block mx-auto mt-6 w-7 opacity-50"
+    class="angela-unicorn-btn block mx-auto mt-6 opacity-50"
     data-unicorn-index="5"
     aria-label="Hidden unicorn"
   >
-    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+    <UnicornEmoji size="sm" />
   </button>
 </section>
 
@@ -91,14 +92,23 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
     }
   }
 
-  function saveFavorite(id) {
-    const favs = getFavorites();
-    if (!favs.includes(id)) {
+  function toggleFavorite(id) {
+    let favs = getFavorites();
+    if (favs.includes(id)) {
+      favs = favs.filter((f) => f !== id);
+    } else {
       favs.push(id);
-      localStorage.setItem(FAV_KEY, JSON.stringify(favs));
-      renderFavorites();
-      renderFiltered();
     }
+    localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+    renderFavorites();
+    renderFiltered();
+  }
+
+  function removeFavorite(id) {
+    const favs = getFavorites().filter((f) => f !== id);
+    localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+    renderFavorites();
+    renderFiltered();
   }
 
   function renderFavorites() {
@@ -106,15 +116,22 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
     const favs = getFavorites();
     if (!el) return;
     if (!favs.length) {
-      el.innerHTML = "<p>No favorites yet — heart a date idea to save it.</p>";
+      el.innerHTML =
+        "<p>No favorites yet — heart a date idea to save it. Tap ♥ again or Remove to unsave.</p>";
       return;
     }
     el.innerHTML = favs
       .map((id) => {
         const d = dates.find((x) => x.id === id);
-        return d ? `<p class="text-warm-ink">♥ ${d.title}</p>` : "";
+        return d
+          ? `<div class="flex justify-between items-center gap-3 not-italic"><span class="text-warm-ink">♥ ${d.title}</span><button type="button" class="remove-fav-btn text-xs text-warm-muted hover:text-red-400 shrink-0" data-id="${d.id}">Remove</button></div>`
+          : "";
       })
       .join("");
+
+    el.querySelectorAll(".remove-fav-btn").forEach((btn) => {
+      btn.addEventListener("click", () => removeFavorite(btn.dataset.id));
+    });
   }
 
   function renderPlanCard(date) {
@@ -140,7 +157,7 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
       <div class="p-4 rounded-xl bg-white/70 border border-lemon-200 hover:border-lemon-400 transition-colors">
         <div class="flex justify-between items-start gap-2 mb-2">
           <h4 class="font-bold text-warm-ink text-sm">${d.title}</h4>
-          <button class="fav-btn text-lg ${favs.includes(d.id) ? "text-red-400" : "text-warm-muted hover:text-red-400"}" data-id="${d.id}" aria-label="Save favorite">${favs.includes(d.id) ? "♥" : "♡"}</button>
+          <button class="fav-btn text-lg ${favs.includes(d.id) ? "text-red-400" : "text-warm-muted hover:text-red-400"}" data-id="${d.id}" aria-label="${favs.includes(d.id) ? "Remove from favorites" : "Save favorite"}">${favs.includes(d.id) ? "♥" : "♡"}</button>
         </div>
         <p class="text-xs text-warm-muted mb-3">${d.description}</p>
         <div class="flex flex-wrap gap-1 mb-3">
@@ -153,7 +170,7 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
       .join("");
 
     el.querySelectorAll(".fav-btn").forEach((btn) => {
-      btn.addEventListener("click", () => saveFavorite(btn.dataset.id));
+      btn.addEventListener("click", () => toggleFavorite(btn.dataset.id));
     });
     el.querySelectorAll(".plan-btn").forEach((btn) => {
       btn.addEventListener("click", () => {

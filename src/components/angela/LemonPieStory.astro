@@ -1,5 +1,6 @@
 ---
 import { angelaConfig } from "@/data/angela/config";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
 
 const { lemonPieStory } = angelaConfig;
 
@@ -46,11 +47,11 @@ const acts = [
   </div>
 
   <button
-    class="angela-unicorn-btn absolute left-[5%] w-7 opacity-50"
+    class="angela-unicorn-btn absolute left-[5%] opacity-50"
     data-unicorn-index="2"
     style="position: relative; margin-top: 1rem"
     aria-label="Hidden unicorn"
   >
-    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+    <UnicornEmoji size="sm" />
   </button>
 </section>

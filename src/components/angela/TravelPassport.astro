@@ -1,5 +1,6 @@
 ---
 import { angelaConfig } from "@/data/angela/config";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
 
 const { travelStamps } = angelaConfig;
 const visitedJson = JSON.stringify(travelStamps.visited);
@@ -17,7 +18,7 @@ const dreamJson = JSON.stringify(travelStamps.dream);
   <div class="angela-card p-6 md:p-10 max-w-lg mx-auto" style="background: linear-gradient(135deg, #FFF8E7 0%, #fff 50%, #F3E8FF 100%)">
     <div class="border-b-2 border-dashed border-lemon-300 pb-4 mb-6 flex justify-between items-center">
       <span class="text-xs uppercase tracking-widest text-warm-muted">Passport</span>
-      <img src="/angela/unicorn.svg" alt="" class="w-6 opacity-60" />
+      <UnicornEmoji size="sm" class="opacity-60" />
     </div>
 
     <div class="flex gap-2 mb-6" role="tablist">
@@ -48,11 +49,11 @@ const dreamJson = JSON.stringify(travelStamps.dream);
   </div>
 
   <button
-    class="angela-unicorn-btn block mx-auto mt-8 w-7 opacity-50"
+    class="angela-unicorn-btn block mx-auto mt-8 opacity-50"
     data-unicorn-index="3"
     aria-label="Hidden unicorn"
   >
-    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+    <UnicornEmoji size="sm" />
   </button>
 </section>
 

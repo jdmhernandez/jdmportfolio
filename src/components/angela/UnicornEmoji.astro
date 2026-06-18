@@ -1,0 +1,13 @@
+---
+interface Props {
+  class?: string;
+  size?: "sm" | "md" | "lg";
+}
+
+const { class: className = "", size = "md" } = Astro.props;
+const sizes = { sm: "text-lg", md: "text-2xl", lg: "text-4xl" };
+---
+
+<span class:list={["inline-block leading-none select-none", sizes[size], className]} aria-hidden="true"
+  >🦄</span
+>

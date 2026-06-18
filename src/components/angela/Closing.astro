@@ -1,11 +1,12 @@
 ---
 import { angelaConfig } from "@/data/angela/config";
+import UnicornEmoji from "@/components/angela/UnicornEmoji.astro";
 
 const { closing, name } = angelaConfig;
 ---
 
 <section id="closing" class="angela-section px-6 py-24 max-w-3xl mx-auto text-center">
-  <img src="/angela/unicorn.svg" alt="" class="w-14 mx-auto mb-6 opacity-70 angela-float" />
+  <UnicornEmoji size="lg" class="mx-auto mb-6 opacity-70 angela-float block" />
   <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-6">
     {closing.title}
   </h2>
@@ -23,10 +24,10 @@ const { closing, name } = angelaConfig;
   </a>
 
   <button
-    class="angela-unicorn-btn block mx-auto mt-10 w-7 opacity-50"
+    class="angela-unicorn-btn block mx-auto mt-10 opacity-50"
     data-unicorn-index="6"
     aria-label="Hidden unicorn"
   >
-    <img src="/angela/unicorn.svg" alt="" class="w-full" />
+    <UnicornEmoji size="sm" />
   </button>
 </section>
