@@ -43,18 +43,29 @@ const { password, passwordHint } = angelaConfig;
   const form = document.getElementById("angela-unlock-form");
   const input = document.getElementById("angela-password");
   const error = document.getElementById("angela-error");
-  const content = document.getElementById("angela-content");
+
+  function getContent() {
+    return document.getElementById("angela-content");
+  }
 
   function unlock() {
     sessionStorage.setItem(STORAGE_KEY, "true");
     gate?.classList.add("is-hidden");
-    content?.classList.add("is-unlocked");
+    getContent()?.classList.add("is-unlocked");
     fireConfetti();
   }
 
-  if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+  function applyUnlockedState() {
     gate?.classList.add("is-hidden");
-    content?.classList.add("is-unlocked");
+    getContent()?.classList.add("is-unlocked");
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", () => {
+      if (sessionStorage.getItem(STORAGE_KEY) === "true") applyUnlockedState();
+    });
+  } else if (sessionStorage.getItem(STORAGE_KEY) === "true") {
+    applyUnlockedState();
   }
 
   form?.addEventListener("submit", (e) => {
@@ -108,7 +119,10 @@ const { password, passwordHint } = angelaConfig;
       });
       frame++;
       if (frame < 90) requestAnimationFrame(animate);
-      else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      else {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        canvas.remove();
+      }
     }
     animate();
   }
