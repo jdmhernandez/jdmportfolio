@@ -17,20 +17,20 @@ export const angelaConfig = {
 
   loveLetter: [
     "Angela, four years with you has been the most beautiful journey of my life. Every day I wake up grateful that the universe put us on the same path.",
-    "You have this way of turning ordinary moments into memories I'll carry forever — a laugh on a long drive, the way you light up when you talk about a place you want to see, the quiet mornings that feel like home.",
-    "I want to know more. More of your stories, more of your dreams, more of every version of you — the traveler, the dreamer, the woman who finds meaning in a lemon pie slice she never got to taste.",
+    "You have this way of turning ordinary moments into memories I'll carry forever. A laugh on a long drive, the way you light up when you talk about a place you want to see, the quiet mornings that feel like home.",
+    "I want to know more. More of your stories, more of your dreams, more of every version of you. The traveler, the dreamer, the woman who finds meaning in a lemon pie slice she never got to taste.",
     "I love you more than words on a screen can hold. This little corner of the internet is just for you.",
   ],
 
   lemonPieStory: {
     sagada:
-      "High in the mountains of Sagada, there's a legend that lives in every bakery window — the famous lemon pie slice. Golden crust, bright filling, a taste of sunshine at the edge of the clouds. Everyone who visits talks about it. It's part of the place itself.",
+      "High in the mountains of Sagada, there's a legend that lives in every bakery window: the famous lemon pie slice. Golden crust, bright filling, a taste of sunshine at the edge of the clouds. Everyone who visits talks about it. It's part of the place itself.",
     disappointment:
-      "You were there. You walked those misty streets, felt that mountain air, stood in the very town where this pie is legendary — and you didn't get to try it. I know how much that disappointed you. You were so close to something everyone raves about, and it slipped away.",
+      "You were there. You walked those misty streets, felt that mountain air, stood in the very town where this pie is legendary, and you didn't get to try it. I know how much that disappointed you. You were so close to something everyone raves about, and it slipped away.",
     meaning:
-      "But you found something deeper in that moment — a meaning that wasn't about the pie at all. Sometimes the things we miss become the stories we carry. The almost-tried, the almost-had. Sagada gave you more than a dessert; it gave you a symbol of longing, of beauty just out of reach, and the grace to find poetry in that.",
+      "But you found something deeper in that moment, a meaning that wasn't about the pie at all. Sometimes the things we miss become the stories we carry. The almost-tried, the almost-had. Sagada gave you more than a dessert; it gave you a symbol of longing, of beauty just out of reach, and the grace to find poetry in that.",
     tattoo:
-      "Now you're etching that story onto your skin — a lemon pie slice tattoo, permanent and proud. I think it's beautiful. Not because of what you missed, but because of what you chose to honor. I'm behind you every step of the way, my love. Wear your story.",
+      "Now you're etching that story onto your skin, a lemon pie slice tattoo, permanent and proud. I think it's beautiful. Not because of what you missed, but because of what you chose to honor. I'm behind you every step of the way. Wear your story.",
   },
 
   timeline: [
@@ -50,13 +50,13 @@ export const angelaConfig = {
       date: "Sagada",
       title: "Your mountains & meaning",
       memory:
-        "A journey you took that stayed with you — misty peaks, lemon pie legends, and a story that became part of who you are. I'm proud of what you found there.",
+        "A journey you took that stayed with you. Misty peaks, lemon pie legends, and a story that became part of who you are. I'm proud of what you found there.",
     },
     {
       date: "Every Day",
       title: "The ordinary magic",
       memory:
-        "Coffee mornings, inside jokes, quiet evenings — the real love lives here.",
+        "Coffee mornings, inside jokes, quiet evenings. The real love lives here.",
     },
   ],
 
@@ -89,8 +89,8 @@ export const angelaConfig = {
       },
       {
         place: "Japan",
-        country: "Mountain / nature side",
-        memory: "Temples, trails, and the quiet beauty of the countryside.",
+        country: "Tokyo",
+        memory: "Our first time in Japan together. Neon, ramen, and the city side of it all.",
       },
       {
         place: "Korea",
@@ -100,10 +100,16 @@ export const angelaConfig = {
       {
         place: "Edmonton",
         country: "Home",
-        memory: "Our home base — river valleys, winter lights, and us.",
+        memory: "Our home base. River valleys, winter lights, and us.",
       },
     ],
     dream: [
+      {
+        place: "Japan",
+        country: "Mountains & nature",
+        memory:
+          "Next time: the quiet side of Japan. Trails, cherry blossoms, nemophila fields, and all the nature we didn't get in Tokyo.",
+      },
       {
         place: "Greece",
         country: "Islands & history",
@@ -117,7 +123,7 @@ export const angelaConfig = {
       {
         place: "Sagada",
         country: "Philippines",
-        memory: "One day — that lemon pie slice, finally.",
+        memory: "One day. That lemon pie slice, finally.",
       },
     ],
   },
@@ -125,9 +131,9 @@ export const angelaConfig = {
   birthday: {
     title: "29 & Unstoppable",
     message:
-      "Don't let anything stop you — especially not a number. Twenty-nine is not a ceiling; it's a launchpad. The best adventures, the boldest dreams, and the deepest love are all still ahead of you.",
+      "Don't let anything stop you, especially not a number. Twenty-nine is not a ceiling; it's a launchpad. The best adventures, the boldest dreams, and the deepest love are all still ahead of you.",
     submessage:
-      "You are a traveler, a dreamer, and the most radiant person I know. Age is just a stamp in the passport — and yours is filling up beautifully.",
+      "You are a traveler, a dreamer, and the most radiant person I know. Age is just a stamp in the passport, and yours is filling up beautifully.",
   },
 
   unicornMessages: [
@@ -154,7 +160,7 @@ export const angelaConfig = {
   closing: {
     title: "Still Choosing You",
     message:
-      "More adventures await, Angela. More cities, more sunsets, more lemon pie slices we actually get to share. I love you — today, tomorrow, and on every trip we haven't taken yet.",
+      "More adventures await, Angela. More cities, more sunsets, more lemon pie slices we actually get to share. I love you today, tomorrow, and on every trip we haven't taken yet.",
     cta: "Spin another date idea",
   },
 };

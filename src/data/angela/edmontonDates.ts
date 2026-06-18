@@ -30,7 +30,7 @@ export const edmontonDates: EdmontonDate[] = [
     id: "strathcona",
     title: "Old Strathcona Evening",
     description:
-      "Explore Whyte Ave — vintage shops, bookstores, and dinner at a cozy spot.",
+      "Explore Whyte Ave: vintage shops, bookstores, and dinner at a cozy spot.",
     why: "Feels like a mini getaway without leaving the city.",
     addOn: "End with gelato or a late walk through the neighbourhood.",
     vibes: ["cozy", "foodie", "night"],
@@ -40,7 +40,7 @@ export const edmontonDates: EdmontonDate[] = [
     title: "Elk Island Stargazing Picnic",
     description:
       "Pack a blanket, snacks, and watch the sky open up away from city lights.",
-    why: "Pure adventure — bison, stars, and just us.",
+    why: "Pure adventure. Bison, stars, and just us.",
     addOn: "Bring a thermos of something warm for when the night cools down.",
     vibes: ["outdoors", "adventure", "cozy"],
   },
@@ -67,7 +67,7 @@ export const edmontonDates: EdmontonDate[] = [
     title: "Neon Sign Museum & Craft Brewery",
     description:
       "Snap photos at the neon museum, then sample local brews nearby.",
-    why: "Colourful, fun, and a little bit quirky — just like us.",
+    why: "Colourful, fun, and a little bit quirky, just like us.",
     addOn: "Walk the Ice District lights if it's evening.",
     vibes: ["artsy", "night", "foodie"],
   },
@@ -87,14 +87,14 @@ export const edmontonDates: EdmontonDate[] = [
     description:
       "An unforgettable farm-to-table experience for when we want to celebrate.",
     why: "Because you deserve the very best.",
-    addOn: "Dress up — make it a whole evening.",
+    addOn: "Dress up. Make it a whole evening.",
     vibes: ["foodie", "night", "cozy"],
   },
   {
     id: "uap",
     title: "UAp District Food Crawl",
     description:
-      "Hop between spots in University Ave — tacos, ramen, coffee, whatever we're craving.",
+      "Hop between spots in University Ave: tacos, ramen, coffee, whatever we're craving.",
     why: "No plan, just following our appetites.",
     addOn: "Pick one new place we've never tried.",
     vibes: ["foodie", "adventure", "night"],
@@ -103,7 +103,7 @@ export const edmontonDates: EdmontonDate[] = [
     id: "fort-edmonton",
     title: "Fort Edmonton Park Day",
     description:
-      "Step back in time — explore the streets, rides, and stories of Edmonton's past.",
+      "Step back in time. Explore the streets, rides, and stories of Edmonton's past.",
     why: "A full day of discovery and wandering hand in hand.",
     addOn: "Pack a picnic for the park grounds.",
     vibes: ["adventure", "outdoors", "artsy"],

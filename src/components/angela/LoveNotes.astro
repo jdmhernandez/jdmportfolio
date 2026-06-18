@@ -14,7 +14,7 @@ const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
       Our Sticky Notes
     </h2>
     <p class="text-warm-muted max-w-xl mx-auto">
-      Leave a note for each other — thoughts, date ideas, inside jokes, or a little love anytime
+      Leave a note for each other. Thoughts, date ideas, inside jokes, or a little love anytime
       you come back.
     </p>
     <p id="notes-mode-label" class="text-xs text-lavender-400 mt-3 italic"></p>
@@ -22,7 +22,7 @@ const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
 
   <div id="welcome-back" class="hidden angela-card p-4 mb-6 text-center border border-lavender-200">
     <p class="text-warm-ink text-sm">
-      Welcome back, {name} <UnicornEmoji size="sm" class="inline-block align-middle" /> — your notes
+      Welcome back, {name} <UnicornEmoji size="sm" class="inline-block align-middle" />. Your notes
       are still here.
     </p>
     <p class="text-xs text-warm-muted mt-1">
@@ -70,7 +70,7 @@ const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 min-h-[8rem]"
   >
     <p class="text-warm-muted italic text-sm col-span-full text-center" id="notes-empty">
-      No notes yet — pin the first one.
+      No notes yet. Pin the first one.
     </p>
   </div>
 </section>
@@ -107,8 +107,8 @@ const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
 
   if (modeLabel) {
     modeLabel.textContent = hasSharedBoard
-      ? "Shared board — you both see the same notes on any device."
-      : "Saving on this device for now — shared board can be enabled later.";
+      ? "Shared board. You both see the same notes on any device."
+      : "Saving on this device for now. Shared board can be enabled later.";
   }
 
   const colorEl = document.getElementById("note-colors");
@@ -220,7 +220,7 @@ const hasSharedBoard = Boolean(supabaseUrl && supabaseKey);
     if (!board) return;
     if (!notes.length) {
       board.innerHTML =
-        '<p class="text-warm-muted italic text-sm col-span-full text-center">No notes yet — pin the first one.</p>';
+        '<p class="text-warm-muted italic text-sm col-span-full text-center">No notes yet. Pin the first one.</p>';
       return;
     }
     board.innerHTML = notes

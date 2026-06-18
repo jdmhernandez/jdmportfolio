@@ -12,7 +12,7 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
     <h2 class="angela-display text-4xl md:text-5xl font-bold text-warm-ink mb-4">
       Edmonton Date Ideas
     </h2>
-    <p class="text-warm-muted">For our next adventure — right here at home.</p>
+    <p class="text-warm-muted">For our next adventure, right here at home.</p>
   </div>
 
   <div class="angela-card p-6 md:p-10 mb-8">
@@ -62,7 +62,7 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
   <div class="angela-card p-6 md:p-10">
     <h3 class="angela-display text-xl font-bold text-warm-ink mb-4">Saved favorites ♥</h3>
     <div id="favorites-list" class="space-y-2 text-sm text-warm-muted italic">
-      <p>No favorites yet — heart a date idea to save it. Tap ♥ again or Remove to unsave.</p>
+      <p>No favorites yet. Heart a date idea to save it. Tap ♥ again or Remove to unsave.</p>
     </div>
   </div>
 
@@ -117,7 +117,7 @@ const vibeKeys = JSON.stringify(Object.keys(vibeLabels));
     if (!el) return;
     if (!favs.length) {
       el.innerHTML =
-        "<p>No favorites yet — heart a date idea to save it. Tap ♥ again or Remove to unsave.</p>";
+        "<p>No favorites yet. Heart a date idea to save it. Tap ♥ again or Remove to unsave.</p>";
       return;
     }
     el.innerHTML = favs
