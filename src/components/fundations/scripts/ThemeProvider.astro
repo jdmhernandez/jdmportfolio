@@ -1,8 +1,9 @@
 ---
 // Theme provider script that handles theme initialization and persistence
+const DEFAULT_THEME = "dark";
 ---
 
-<script define:vars={{ theme: "light" }}>
+<script define:vars={{ theme: DEFAULT_THEME }}>
   // Theme management
   class ThemeManager {
     constructor() {
@@ -10,15 +11,11 @@
     }
 
     init() {
-      // Get saved theme or default to light
-      const savedTheme = localStorage.getItem('theme') || 'light';
+      const savedTheme = localStorage.getItem('theme') || DEFAULT_THEME;
 
-      // Apply theme immediately
       this.applyTheme(savedTheme);
 
-      // Listen for system theme changes
       window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-        // Only auto-switch if no manual preference is saved
         if (!localStorage.getItem('theme')) {
           this.applyTheme(e.matches ? 'dark' : 'light');
         }
@@ -34,7 +31,6 @@
         root.classList.remove('dark');
       }
 
-      // Update meta theme-color
       const metaThemeColor = document.querySelector('meta[name="theme-color"]');
       if (metaThemeColor) {
         metaThemeColor.setAttribute('content', theme === 'dark' ? '#000000' : '#ffffff');
@@ -42,7 +38,7 @@
     }
 
     toggle() {
-      const currentTheme = localStorage.getItem('theme') || 'light';
+      const currentTheme = localStorage.getItem('theme') || DEFAULT_THEME;
       const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
 
       localStorage.setItem('theme', newTheme);
@@ -52,10 +48,9 @@
     }
 
     getCurrentTheme() {
-      return localStorage.getItem('theme') || 'light';
+      return localStorage.getItem('theme') || DEFAULT_THEME;
     }
   }
 
-  // Make theme manager globally available
   window.themeManager = new ThemeManager();
 </script>

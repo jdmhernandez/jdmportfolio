@@ -17,7 +17,16 @@ import ThemeToggle from "@/components/fundations/elements/ThemeToggle.astro";
         Justin Hernandez
       </Text>
       <nav class="flex gap-1 sm:gap-2 items-center w-full lg:w-fit justify-between lg:justify-end">
-        <ThemeToggle />
+        <div class="flex flex-col items-center gap-1">
+          <ThemeToggle />
+          <Text
+            tag="p"
+            variant="textXS"
+            class="hidden sm:block max-w-[8.5rem] text-center text-base-500 dark:text-base-500 leading-tight"
+          >
+            Dark by default. Light mode is opt-in, like cardio.
+          </Text>
+        </div>
         <div class="flex gap-1 sm:gap-2">
           <a
             href="#projects"

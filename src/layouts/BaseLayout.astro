@@ -7,8 +7,18 @@ import ScrollReveal from "@/components/fundations/scripts/ScrollReveal.astro";
 
 import Footer from "@/components/global/Footer.astro";
 ---
-<html lang="en" class="selection:bg-base-200 selection:text-base-900 dark:selection:bg-base-800 dark:selection:text-base-100">
+<html lang="en" class="dark selection:bg-base-200 selection:text-base-900 dark:selection:bg-base-800 dark:selection:text-base-100">
   <head>
+    <script is:inline>
+      (function () {
+        const theme = localStorage.getItem("theme") || "dark";
+        if (theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      })();
+    </script>
     <BaseHead />
     <ThemeProvider />
   </head>
