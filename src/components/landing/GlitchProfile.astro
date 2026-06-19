@@ -6,15 +6,16 @@ import turbogranny from "@/images/work/turbogranny.png";
 ---
 
 <div class="glitch-profile-frame relative z-10">
-  <Image
-    src={turbogranny}
-    alt=""
-    width={507}
-    height={507}
-    class="turbogranny-peek pointer-events-none"
-    aria-hidden="true"
-  />
-  <div class="glitch-profile-inner relative w-44 sm:w-64 lg:w-80 aspect-[3/4] overflow-hidden rounded-2xl bg-base-100 dark:bg-base-800 mx-auto">
+  <div class="glitch-profile-slot relative w-fit mx-auto">
+    <Image
+      src={turbogranny}
+      alt=""
+      width={507}
+      height={507}
+      class="turbogranny-peek pointer-events-none"
+      aria-hidden="true"
+    />
+    <div class="glitch-profile-inner relative w-44 sm:w-64 lg:w-80 aspect-[3/4] overflow-hidden rounded-2xl bg-base-100 dark:bg-base-800">
     <Image
       src={cleanPhoto}
       alt="Justin Hernandez"
@@ -30,6 +31,7 @@ import turbogranny from "@/images/work/turbogranny.png";
       class="glitch-photo glitch-photo-b absolute inset-0 w-full h-full object-cover object-top"
     />
     <div class="glitch-scanlines pointer-events-none absolute inset-0 opacity-0" aria-hidden="true"></div>
+    </div>
   </div>
 </div>
 
@@ -56,15 +58,25 @@ import turbogranny from "@/images/work/turbogranny.png";
       0 20px 50px -12px oklch(0.205 0 0 / 0.35);
   }
 
+  .glitch-profile-slot {
+    overflow: visible;
+  }
+
+  .glitch-profile-inner {
+    position: relative;
+    z-index: 2;
+  }
+
   .turbogranny-peek {
     position: absolute;
-    right: calc(100% - 0.35rem);
+    right: 100%;
     top: 50%;
+    margin-right: -2px;
     width: clamp(4rem, 22vw, 6.75rem);
     height: auto;
-    z-index: 4;
+    z-index: 1;
     opacity: 0;
-    transform: translateY(-50%) translateX(1.15rem);
+    transform: translateY(-50%) translateX(0.55rem);
     animation: turbogranny-peek 8s linear infinite;
     filter: drop-shadow(0 6px 14px oklch(0 0 0 / 0.35));
   }
@@ -183,111 +195,111 @@ import turbogranny from "@/images/work/turbogranny.png";
     0%,
     44.5% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     45% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     45.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     47.5% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     48.3% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     51% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     51.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     55% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     55.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     60% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     60.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     66% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     66.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     73% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     73.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     81% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     81.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     88% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     88.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     95% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     95.8% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     97.5% {
       opacity: 1;
-      transform: translateY(-50%) translateX(-0.5rem);
+      transform: translateY(-50%) translateX(-0.75rem);
     }
     98.3% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
 
     100% {
       opacity: 0;
-      transform: translateY(-50%) translateX(1.15rem);
+      transform: translateY(-50%) translateX(0.55rem);
     }
   }
 </style>
