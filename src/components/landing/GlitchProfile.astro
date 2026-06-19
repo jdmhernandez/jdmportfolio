@@ -1,0 +1,154 @@
+---
+import { Image } from "astro:assets";
+import cleanPhoto from "@/images/work/justin-clean.png";
+import glitchPhoto from "@/images/work/justin-glitch.png";
+---
+
+<div class="glitch-profile-frame relative z-10">
+  <div class="glitch-profile-inner relative w-56 sm:w-64 lg:w-80 aspect-[3/4] overflow-hidden rounded-2xl bg-base-100 dark:bg-base-800">
+    <Image
+      src={cleanPhoto}
+      alt="Justin Hernandez"
+      width={600}
+      height={800}
+      class="glitch-photo glitch-photo-a absolute inset-0 w-full h-full object-cover object-top"
+    />
+    <Image
+      src={glitchPhoto}
+      alt="Justin Hernandez glitch portrait"
+      width={600}
+      height={800}
+      class="glitch-photo glitch-photo-b absolute inset-0 w-full h-full object-cover object-top"
+    />
+    <div class="glitch-scanlines pointer-events-none absolute inset-0 opacity-0" aria-hidden="true"></div>
+  </div>
+</div>
+
+<style>
+  .glitch-profile-frame {
+    padding: 3px;
+    border-radius: 1.25rem;
+    background: linear-gradient(
+      135deg,
+      oklch(0.65 0.2 295),
+      oklch(0.56 0.18 25),
+      oklch(0.74 0.16 300),
+      oklch(0.65 0.2 295)
+    );
+    background-size: 300% 300%;
+    animation: glitch-border 6s ease infinite;
+    box-shadow:
+      0 0 0 1px oklch(0.922 0 0 / 0.15),
+      0 20px 50px -12px oklch(0.205 0 0 / 0.35);
+  }
+
+  :global(.dark) .glitch-profile-frame {
+    box-shadow:
+      0 0 0 1px oklch(0.269 0 0 / 0.5),
+      0 20px 50px -12px oklch(0 0 0 / 0.6),
+      0 0 40px -10px oklch(0.65 0.2 295 / 0.35);
+  }
+
+  @keyframes glitch-border {
+    0%,
+    100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+
+  .glitch-photo-a {
+    animation: show-clean 8s steps(1) infinite;
+  }
+
+  .glitch-photo-b {
+    animation: show-glitch 8s steps(1) infinite;
+  }
+
+  .glitch-scanlines {
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      oklch(1 0 0 / 0.03) 2px,
+      oklch(1 0 0 / 0.03) 4px
+    );
+    animation: scan-flicker 8s steps(1) infinite;
+  }
+
+  @keyframes show-clean {
+    0%,
+    44% {
+      opacity: 1;
+      transform: translate(0, 0);
+      filter: none;
+    }
+    45%,
+    49% {
+      opacity: 1;
+      transform: translate(-4px, 0);
+      filter: drop-shadow(3px 0 0 #ff0040) drop-shadow(-3px 0 0 #00e5ff);
+    }
+    50%,
+    94% {
+      opacity: 0;
+      transform: translate(4px, 0);
+    }
+    95%,
+    99% {
+      opacity: 1;
+      transform: translate(2px, 0);
+      filter: drop-shadow(2px 0 0 #ff0040) drop-shadow(-2px 0 0 #00e5ff);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(0, 0);
+      filter: none;
+    }
+  }
+
+  @keyframes show-glitch {
+    0%,
+    44% {
+      opacity: 0;
+      transform: translate(4px, 0);
+    }
+    45%,
+    49% {
+      opacity: 1;
+      transform: translate(4px, 0);
+      filter: drop-shadow(-3px 0 0 #ff0040) drop-shadow(3px 0 0 #00e5ff);
+    }
+    50%,
+    94% {
+      opacity: 1;
+      transform: translate(0, 0);
+      filter: none;
+    }
+    95%,
+    99% {
+      opacity: 1;
+      transform: translate(-2px, 0);
+      filter: drop-shadow(-2px 0 0 #ff0040) drop-shadow(2px 0 0 #00e5ff);
+    }
+    100% {
+      opacity: 0;
+      transform: translate(-4px, 0);
+    }
+  }
+
+  @keyframes scan-flicker {
+    45%,
+    49%,
+    95%,
+    99% {
+      opacity: 0.6;
+    }
+    0%,
+    100% {
+      opacity: 0;
+    }
+  }
+</style>

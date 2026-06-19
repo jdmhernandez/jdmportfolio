@@ -1,8 +1,7 @@
 ---
 // Assets
-import { Image } from "astro:assets";
 import Logo from "@/components/assets/Logo.astro";
-import JustinPhoto from "@/images/work/JustinDev.jpg";
+import GlitchProfile from "@/components/landing/GlitchProfile.astro";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
@@ -45,13 +44,7 @@ import ThemeToggle from "@/components/fundations/elements/ThemeToggle.astro";
           </p>
         </div>
         {/* Image */}
-        <Image 
-          src={JustinPhoto}
-          alt="Justin Hernandez - Web Designer and Developer"
-          width={600}
-          height={600}
-          class="w-56 sm:w-64 lg:w-80 h-auto rounded-2xl shadow-2xl dark:shadow-2xl object-cover relative z-10"
-        />
+        <GlitchProfile />
       </div>
     </div>
 
@@ -65,12 +58,15 @@ import ThemeToggle from "@/components/fundations/elements/ThemeToggle.astro";
           variant="textXS"
           class="text-base-900 dark:text-base-100 font-bold uppercase"
         >
-          Junior Front-End Developer
+          Aspiring IT Developer
         </Text>
       </div>
       <div class="lg:col-span-2">
         <Text tag="p" variant="textSM" class="text-base-600 dark:text-base-400 leading-relaxed">
-          Hey there! I'm Justin Hernandez (you might know me online as Jdev). I create digital experiences that don't just look good—they actually <span class="text-accent-500 dark:text-accent-400 font-medium">*feel*</span> good to use. Recent NAIT Digital Media & IT graduate, ready to build fast, accessible websites.
+          Hey, I'm Justin Hernandez (Jdev). Weekdays I'm a pump mechanic, weekends I'm behind the
+          espresso bar, and in between I'm actively chasing a career in IT. NAIT Digital Media &
+          IT graduate, recently through the Philippines, Korea, and Japan, still building projects
+          and looking for the right dev role. I care about sites that feel as good as they look.
         </Text>
       </div>
     </div>
