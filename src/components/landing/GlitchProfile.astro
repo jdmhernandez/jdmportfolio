@@ -2,9 +2,18 @@
 import { Image } from "astro:assets";
 import cleanPhoto from "@/images/work/justin-clean.png";
 import glitchPhoto from "@/images/work/justin-glitch.png";
+import turbogranny from "@/images/work/turbogranny.png";
 ---
 
 <div class="glitch-profile-frame relative z-10">
+  <Image
+    src={turbogranny}
+    alt=""
+    width={507}
+    height={507}
+    class="turbogranny-peek pointer-events-none"
+    aria-hidden="true"
+  />
   <div class="glitch-profile-inner relative w-44 sm:w-64 lg:w-80 aspect-[3/4] overflow-hidden rounded-2xl bg-base-100 dark:bg-base-800 mx-auto">
     <Image
       src={cleanPhoto}
@@ -32,6 +41,7 @@ import glitchPhoto from "@/images/work/justin-glitch.png";
     margin: 0 auto;
     position: relative;
     z-index: 2;
+    overflow: visible;
     background: linear-gradient(
       135deg,
       oklch(0.65 0.2 295),
@@ -44,6 +54,19 @@ import glitchPhoto from "@/images/work/justin-glitch.png";
     box-shadow:
       0 0 0 1px oklch(0.922 0 0 / 0.15),
       0 20px 50px -12px oklch(0.205 0 0 / 0.35);
+  }
+
+  .turbogranny-peek {
+    position: absolute;
+    right: calc(100% - 0.35rem);
+    top: 50%;
+    width: clamp(3rem, 16vw, 5.25rem);
+    height: auto;
+    z-index: 4;
+    opacity: 0;
+    transform: translateY(-50%) translateX(0.5rem);
+    animation: turbogranny-peek 8s steps(1) infinite;
+    filter: drop-shadow(0 6px 14px oklch(0 0 0 / 0.35));
   }
 
   :global(.dark) .glitch-profile-frame {
@@ -153,6 +176,28 @@ import glitchPhoto from "@/images/work/justin-glitch.png";
     0%,
     100% {
       opacity: 0;
+    }
+  }
+
+  @keyframes turbogranny-peek {
+    0%,
+    44% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(0.85rem);
+    }
+    45%,
+    94% {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+    95%,
+    99% {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-50%) translateX(0.85rem);
     }
   }
 </style>
