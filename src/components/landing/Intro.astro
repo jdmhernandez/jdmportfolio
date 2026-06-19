@@ -2,6 +2,7 @@
 // Assets
 import Logo from "@/components/assets/Logo.astro";
 import GlitchProfile from "@/components/landing/GlitchProfile.astro";
+import HeroBackdrop from "@/components/landing/HeroBackdrop.astro";
 // Fundations
 import Text from "@/components/fundations/elements/Text.astro";
 import Wrapper from "@/components/fundations/containers/Wrapper.astro";
@@ -35,15 +36,9 @@ import ThemeToggle from "@/components/fundations/elements/ThemeToggle.astro";
     </div>
 
     {/* Hero Image Section */}
-    <div class="flex justify-center items-center py-12 sm:py-16 relative">
-      <div class="relative inline-block">
-        {/* Background text effect */}
-        <div class="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden rounded-2xl -inset-20">
-          <p class="text-7xl sm:text-9xl lg:text-[180px] font-black text-accent-600 dark:text-accent-400 opacity-100 -z-10 select-none tracking-tighter leading-none">
-            jdev
-          </p>
-        </div>
-        {/* Image */}
+    <div class="flex justify-center items-center py-12 sm:py-16 relative overflow-hidden">
+      <div class="relative inline-block z-10">
+        <HeroBackdrop />
         <GlitchProfile />
       </div>
     </div>
